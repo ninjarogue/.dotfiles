@@ -1,0 +1,16 @@
+[user]
+	email = 74705062+ninjarogue@users.noreply.github.com
+	name = Aric
+	username = ninjarogue
+[credential]
+	helper = osxkeychain
+[core]
+	excludesfile = /Users/jiangthang/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/jiangthang/.stCommitMsg
