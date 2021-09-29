@@ -55,17 +55,16 @@ lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
 lvim.keys.normal_mode["<C-n>"] = ":nohl<CR>"
 lvim.keys.normal_mode["<leader>q"] = ":q<CR>"
-lvim.keys.normal_mode["H"] = "_"
-lvim.keys.normal_mode["L"] = "g_"
-lvim.keys.normal_mode["<C-h>"] = ":BufferPrevious<cr>"
-lvim.keys.normal_mode["<C-l>"] = ":BufferNext<cr>"
+lvim.keys.normal_mode["<C-h>"] = "_"
+lvim.keys.normal_mode["<C-l>"] = "g_"
+lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
+lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
 
 
 
 vim.cmd("xnoremap p \"_dP")
 vim.cmd("inoremap jk <esc>")
 vim.cmd("inoremap kj <esc>")
-vim.cmd("inoremap jj <esc>")
 
 
 
@@ -103,11 +102,6 @@ end
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
--- see :help hop for more commands
-lvim.builtin.which_key.mappings["h"] = { 
-  name = "Hop",
-  h = { "<cmd>lua require'hop'.hint_char2()<cr>", "Hop" }
-}
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -320,29 +314,58 @@ lvim.builtin.nvimtree.icons.git = {
 -- Additional Plugins
 lvim.plugins = {
     {"folke/tokyonight.nvim"},
+   
     {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
     },
+   
     {"tpope/vim-fugitive"},
+   
     {"ray-x/lsp_signature.nvim"},
+   
     {"folke/lsp-colors.nvim"},
+   
     { 
       "windwp/nvim-ts-autotag", 
       event="InsertEnter",
     },
+   
     {
       "phaazon/hop.nvim",
       config = function()
       require("user.hop").config()
       end
     },
+   
     {
       "lukas-reineke/indent-blankline.nvim",
       config = function()
       require "user.blankline"
       end
-    }
+    },
+   
+    {
+      "unblevable/quick-scope",
+      config = function()
+      require "user.quickscope"
+      end
+    },
+   
+    {
+      "andymass/vim-matchup",
+      event = "CursorMoved",
+      config = function()
+      require "user.matchup"
+      end
+    },
+
+    -- {
+    --  "karb94/neoscroll.nvim",
+    --  config = function()
+    --  require("user.neoscroll").config()
+    --  end,
+    -- },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
