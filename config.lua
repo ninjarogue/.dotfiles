@@ -60,17 +60,17 @@ lvim.keys.normal_mode["<C-l>"] = "g_"
 lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
 lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
 
-
-
-vim.cmd("xnoremap p \"_dP")
+vim.cmd('nnoremap Y yg$')
+vim.cmd('nnoremap <leader>d "_d')
+vim.cmd('vnoremap <leader>d "_d')
+vim.cmd("xnoremap <leader>p \"_dP")
 vim.cmd("inoremap jk <esc>")
 vim.cmd("inoremap kj <esc>")
+vim.cmd("nnoremap ytp vf)y")
 
 
-lvim.keys.visual_mode["Y"] = "y$"
 lvim.keys.visual_mode["<leader>j"] = "J"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
+-- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
@@ -78,8 +78,18 @@ lvim.keys.visual_mode["<leader>j"] = "J"
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
+-- if you don't want all the parsers change this to a table of the ones you want
+lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.indent.enable = true
 
+-- NvimTree
+lvim.builtin.nvimtree.setup.view.width = 60 
 
+-- nvim-cmp
+lvim.builtin.cmp.mapping["<TAB>"] = require'cmp'.mapping.confirm({ select = true })
+ 
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
@@ -100,7 +110,6 @@ end
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -125,14 +134,10 @@ lvim.builtin.which_key.mappings["gf"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
+
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.indent.enable = true
 
 
 
@@ -321,7 +326,7 @@ lvim.plugins = {
     },
    
     {"tpope/vim-fugitive"},
-   
+
     {"ray-x/lsp_signature.nvim"},
    
     {"folke/lsp-colors.nvim"},
@@ -334,21 +339,20 @@ lvim.plugins = {
     {
       "phaazon/hop.nvim",
       config = function()
-      require("user.hop").config()
+        require("user.hop").config()
       end
     },
    
-    {
-      "lukas-reineke/indent-blankline.nvim",
+    { "lukas-reineke/indent-blankline.nvim",
       config = function()
-      require "user.blankline"
+        require "user.blankline"
       end
     },
    
     {
       "unblevable/quick-scope",
       config = function()
-      require "user.quickscope"
+        require "user.quickscope"
       end
     },
    
@@ -356,7 +360,7 @@ lvim.plugins = {
       "andymass/vim-matchup",
       event = "CursorMoved",
       config = function()
-      require "user.matchup"
+        require "user.matchup"
       end
     },
 
@@ -364,14 +368,14 @@ lvim.plugins = {
       "nacro90/numb.nvim",
       event = "BufRead",
       config = function()
-      require("user.numb").config()
+        require("user.numb").config()
       end,
     },
 
     {
       "abecodes/tabout.nvim",
       config = function()
-      require("user.tabout").config()
+        require("user.tabout").config()
       end,
       wants = { "nvim-treesitter" }, -- or require if not used so far
       after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
@@ -393,18 +397,25 @@ lvim.plugins = {
     },
 
     {
-        "karb94/neoscroll.nvim",
-        config = function()
-          require("user.neoscroll").config()
-        end,
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("user.neoscroll").config()
+      end,
     },
 }
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
   {"InsertEnter", "*", ":normal zz"}
 }
+
+lvim.autocommands.custom_groups = {
+  { "BufWinEnter", "*", ":PackerLoad nvim-autopairs" },
+}
+
+
 
 vim.cmd [[ autocmd BufWritePre *.tsx %s/\s\+$//e" ]]
 
