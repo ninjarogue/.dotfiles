@@ -67,7 +67,6 @@ vim.cmd("inoremap jk <esc>")
 vim.cmd("inoremap kj <esc>")
 
 
-
 lvim.keys.visual_mode["Y"] = "y$"
 lvim.keys.visual_mode["<leader>j"] = "J"
 -- unmap a default keymapping
@@ -133,6 +132,7 @@ lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.indent.enable = true
 
 
 
@@ -330,7 +330,7 @@ lvim.plugins = {
       "windwp/nvim-ts-autotag", 
       event="InsertEnter",
     },
-   
+  
     {
       "phaazon/hop.nvim",
       config = function()
@@ -360,12 +360,44 @@ lvim.plugins = {
       end
     },
 
-    -- {
-    --  "karb94/neoscroll.nvim",
-    --  config = function()
-    --  require("user.neoscroll").config()
-    --  end,
-    -- },
+    {
+      "nacro90/numb.nvim",
+      event = "BufRead",
+      config = function()
+      require("user.numb").config()
+      end,
+    },
+
+    {
+      "abecodes/tabout.nvim",
+      config = function()
+      require("user.tabout").config()
+      end,
+      wants = { "nvim-treesitter" }, -- or require if not used so far
+      after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
+    },
+
+    {
+      "tzachar/cmp-tabnine",
+      config = function()
+        local tabnine = require "cmp_tabnine.config"
+        tabnine:setup {
+          max_lines = 1000,
+          max_num_results = 20,
+          sort = true,
+        }
+      end,
+
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-cmp",
+    },
+
+    {
+        "karb94/neoscroll.nvim",
+        config = function()
+          require("user.neoscroll").config()
+        end,
+    },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
