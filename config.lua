@@ -1,12 +1,11 @@
---[[
-lvim is the global options object
+-- lvim is the global options object
 
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
+-- Linters should be filled in as strings with either a global executable or a path to an executable
+
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+
+-- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+
 
 -- general
 lvim.log.level = "warn"
@@ -44,8 +43,9 @@ vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
+-- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
 -- add your own keymapping
+lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["J"] = "5j"
 lvim.keys.normal_mode["K"] = "5k"
@@ -59,22 +59,16 @@ lvim.keys.normal_mode["<C-h>"] = "_"
 lvim.keys.normal_mode["<C-l>"] = "g_"
 lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
 lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
-
 vim.cmd('nnoremap Y yg$')
 vim.cmd('nnoremap <leader>d "_d')
-vim.cmd('vnoremap <leader>d "_d')
-vim.cmd("xnoremap <leader>p \"_dP")
-vim.cmd("inoremap jk <esc>")
-vim.cmd("inoremap kj <esc>")
 vim.cmd("nnoremap ytp vf)y")
-
-
-
--- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+vim.cmd('vnoremap <leader>d "_d')
 lvim.keys.visual_mode["<leader>j"] = "J"
---
+vim.cmd("xnoremap <leader>p \"_dP")
+vim.cmd("nnoremap cc :Git Commit<cr>")
+vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
+
+
 -- Additional Plugins
 lvim.plugins = {
     {"folke/tokyonight.nvim"},
@@ -169,24 +163,35 @@ lvim.plugins = {
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
-
-
-
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
+lvim.builtin.nvimtree.icons.git = {
+  unstaged = "✗",
+  staged = "✓",
+  unmerged = "",
+  renamed = "➜",
+  untracked = "★",
+  deleted = "",
+  ignored = "◌",
+}
+require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+    filetypes = { "html" , "typescriptreact", "javascriptreact" },
+  }
+}
 
 
 
--- NvimTree
-lvim.builtin.nvimtree.setup.view.width = 60 
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 1
+lvim.builtin.nvimtree.setup.view.width = 60
 
 
 
--- nvim-cmp
--- lvim.builtin.cmp.mapping["<Tab>"] = require'cmp'.mapping.confirm({ select = true, behavior = require'cmp'.ConfirmBehavior.Insert })
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
   local actions = require "telescope.actions"
@@ -206,9 +211,6 @@ end
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-
-
-
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -218,9 +220,6 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
-
-
-
 lvim.builtin.which_key.mappings["v"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
@@ -232,15 +231,8 @@ lvim.builtin.which_key.mappings["v"] = {
 
 
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
-
-
-
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
 
 
 
@@ -314,42 +306,26 @@ end
 
   padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
 
-  transpancy = nil, -- disabled by default, allow floating win transparent value 1~100
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
   shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
   timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
   toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 }
 
-
-
-require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-    filetypes = { "html" , "typescriptreact", "javascriptreact" },
-  }
-}
-
-
-
 require'lsp_signature'.setup(cfg)
 require'lsp_signature'.on_attach(cfg)
 
--- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---   }
--- }
--- set an additional linter
+
+
 lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
-
 lvim.format_on_save = false
 
+
+
 require('hop').setup{
-  keys = 'etovxqpdygfblzhckisuran', 
+  keys = 'etovxqpdygfblzhckisuran',
   term_seq_bias = 0.5
 }
 
@@ -358,18 +334,6 @@ require('lsp-colors').setup{
   warning = "#e0af68",
   information = "#0db9d7",
   hint = "#10b981"
-}
-
-
-
-lvim.builtin.nvimtree.icons.git = {
-  unstaged = "✗",
-  staged = "✓",
-  unmerged = "",
-  renamed = "➜",
-  untracked = "★",
-  deleted = "",
-  ignored = "◌",
 }
 
 
