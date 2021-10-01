@@ -76,25 +76,22 @@ shift + ctrl - d : yabai -m window --move rel:20:0
 
 
 # Float and center
-alt - t : yabai -m window --toggle float;\
+shift + lctrl - c : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 
 
+# Equalize size of windows
+lctrl + alt - 0 : yabai -m space --balance
 
-# toggle center window on screen in an orientation fit for reading/writing
-shift + cmd + ctrl - space : export CURRENT_SPACE=$(yabai -m query --spaces | jq -r '.[]|select(.focused==1)') ; \
-                             export INDEX=$(echo $CURRENT_SPACE | jq -r '.index') ; \
-                             export DISPLAY=$(echo $CURRENT_SPACE | jq -r '.display') ; \
-			     export PADDING=$(($(yabai -m query --displays --display $DISPLAY | jq -r '.frame.w') / 4)) ; \
-                             if [[ "$(yabai -m config --space $INDEX left_padding)" != $PADDING ]]; then \
-                               { yabai -m config --space $INDEX left_padding $PADDING && \
-                                 yabai -m config --space $INDEX right_padding $PADDING } \
-			     else \
-                               { yabai -m config --space $INDEX left_padding 10 &&  \
-                                 yabai -m config --space $INDEX right_padding 10  } \
-			     fi
+# Restart Yabai
+shift + cmd + alt - r :
+    /usr/bin/env osascript <<< \
+        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
+# cycle clockwise
+ctrl + shift - j : yabai -m window first --swap next && yabai -m window first --swap last
 
-# opens iTerm2
-#alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
+# cycle counter-clockwise
+ctrl + shift - k : yabai -m window first --swap last && yabai -m window first --swap  next

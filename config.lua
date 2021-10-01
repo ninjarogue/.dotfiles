@@ -87,10 +87,11 @@ lvim.builtin.treesitter.indent.enable = true
 -- NvimTree
 lvim.builtin.nvimtree.setup.view.width = 60 
 
--- nvim-cmp
-lvim.builtin.cmp.mapping["<TAB>"] = require'cmp'.mapping.confirm({ select = true })
- 
 
+-- nvim-cmp
+-- lvim.builtin.cmp.mapping["<Tab>"] = require'cmp'.mapping.confirm({ select = true, behavior = require'cmp'.ConfirmBehavior.Insert })
+
+ 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
   local actions = require "telescope.actions"
