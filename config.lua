@@ -7,6 +7,7 @@
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -55,111 +56,118 @@ lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
 lvim.keys.normal_mode["<C-n>"] = ":nohl<CR>"
 lvim.keys.normal_mode["<leader>q"] = ":q<CR>"
-lvim.keys.normal_mode["<C-h>"] = "_"
-lvim.keys.normal_mode["<C-l>"] = "g_"
 lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
 lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
 vim.cmd('nnoremap Y yg$')
 vim.cmd('nnoremap <leader>d "_d')
 vim.cmd("nnoremap ytp vf)y")
-vim.cmd('vnoremap <leader>d "_d')
-lvim.keys.visual_mode["<leader>j"] = "J"
-vim.cmd("xnoremap <leader>p \"_dP")
 vim.cmd("nnoremap cc :Git commit<cr>")
 vim.cmd("nnoremap cp :Git push<cr>")
 vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
-vim.cmd("nnoremap <leader>ww :wq<cr>")
+vim.cmd("nnoremap <leader>wq :wq<cr>")
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap <S-u> <C-u>")
 vim.cmd("nnoremap <S-d> <C-d>")
+vim.cmd("nnoremap <C-h> <C-w>h")
+vim.cmd("nnoremap <C-j> <C-w>j")
+vim.cmd("nnoremap <C-k> <C-w>k")
+vim.cmd("nnoremap <C-l> <C-w>l")
+vim.cmd("nnoremap oo  o<esc>k")
+vim.cmd("nnoremap OO  O<esc>j")
 
+vim.cmd('vnoremap <leader>d "_d')
+vim.cmd('vnoremap <leader>j J')
+
+vim.cmd("xnoremap <leader>p \"_dP")
 
 -- Additional Plugins
 lvim.plugins = {
-    {"folke/tokyonight.nvim"},
+  {"folke/tokyonight.nvim"},
 
-    {
+  {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
-    },
+  },
 
-    {"tpope/vim-fugitive"},
+  {"tpope/vim-fugitive"},
 
-    {"ray-x/lsp_signature.nvim"},
+  {"ray-x/lsp_signature.nvim"},
 
-    {"folke/lsp-colors.nvim"},
+  {"folke/lsp-colors.nvim"},
 
-    {
-      "windwp/nvim-ts-autotag",
-      event="InsertEnter",
-    },
+  {
+    "windwp/nvim-ts-autotag",
+    event="InsertEnter",
+  },
 
-    {
-      "phaazon/hop.nvim",
-      config = function()
-        require("user.hop").config()
-      end
-    },
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      require("user.hop").config()
+    end
+  },
 
-    { "lukas-reineke/indent-blankline.nvim",
-      config = function()
-        require "user.blankline"
-      end
-    },
+  { "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require "user.blankline"
+    end
+  },
 
-    {
-      "unblevable/quick-scope",
-      config = function()
-        require "user.quickscope"
-      end
-    },
+  {
+    "unblevable/quick-scope",
+    config = function()
+      require "user.quickscope"
+    end
+  },
 
-    {
-      "andymass/vim-matchup",
-      event = "CursorMoved",
-      config = function()
-        require "user.matchup"
-      end
-    },
+  {
+    "andymass/vim-matchup",
+    event = "CursorMoved",
+    config = function()
+      require "user.matchup"
+    end
+  },
 
-    {
-      "nacro90/numb.nvim",
-      event = "BufRead",
-      config = function()
-        require("user.numb").config()
-      end,
-    },
+  {
+    "nacro90/numb.nvim",
+    event = "BufRead",
+    config = function()
+      require("user.numb").config()
+    end,
+  },
 
-    {
-      "abecodes/tabout.nvim",
-      config = function()
-        require("user.tabout").config()
-      end,
-      wants = { "nvim-treesitter" }, -- or require if not used so far
-      after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
-    },
+  -- {
+  --   "abecodes/tabout.nvim",
+  --   config = function()
+  --     require("user.tabout").config()
+  --   end,
+  --   wants = { "nvim-treesitter" }, -- or require if not used so far
+  --   after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
+  -- },
 
-    {
-      "tzachar/cmp-tabnine",
-      config = function()
-        local tabnine = require "cmp_tabnine.config"
-        tabnine:setup {
-          max_lines = 1000,
-          max_num_results = 20,
-          sort = true,
-        }
-      end,
+  {
+    "tzachar/cmp-tabnine",
+    config = function()
+      local tabnine = require "cmp_tabnine.config"
+      tabnine:setup {
+        max_lines = 1000,
+        max_num_results = 20,
+        sort = true,
+    }
+    end,
 
-      run = "./install.sh",
-      requires = "hrsh7th/nvim-cmp",
-    },
+    run = "./install.sh",
+    requires = "hrsh7th/nvim-cmp",
+  },
 
-    {
-      "karb94/neoscroll.nvim",
-      config = function()
-        require("user.neoscroll").config()
-      end,
-    },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("user.neoscroll").config()
+    end,
+  },
+
+  { "simrat39/symbols-outline.nvim" }
 }
 
 
