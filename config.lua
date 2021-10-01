@@ -69,29 +69,124 @@ vim.cmd("inoremap kj <esc>")
 vim.cmd("nnoremap ytp vf)y")
 
 
-lvim.keys.visual_mode["<leader>j"] = "J"
+
 -- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+lvim.keys.visual_mode["<leader>j"] = "J"
+--
+-- Additional Plugins
+lvim.plugins = {
+    {"folke/tokyonight.nvim"},
+
+    {
+      "folke/trouble.nvim",
+      cmd = "TroubleToggle",
+    },
+
+    {"tpope/vim-fugitive"},
+
+    {"ray-x/lsp_signature.nvim"},
+
+    {"folke/lsp-colors.nvim"},
+
+    {
+      "windwp/nvim-ts-autotag",
+      event="InsertEnter",
+    },
+
+    {
+      "phaazon/hop.nvim",
+      config = function()
+        require("user.hop").config()
+      end
+    },
+
+    { "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require "user.blankline"
+      end
+    },
+
+    {
+      "unblevable/quick-scope",
+      config = function()
+        require "user.quickscope"
+      end
+    },
+
+    {
+      "andymass/vim-matchup",
+      event = "CursorMoved",
+      config = function()
+        require "user.matchup"
+      end
+    },
+
+    {
+      "nacro90/numb.nvim",
+      event = "BufRead",
+      config = function()
+        require("user.numb").config()
+      end,
+    },
+
+    {
+      "abecodes/tabout.nvim",
+      config = function()
+        require("user.tabout").config()
+      end,
+      wants = { "nvim-treesitter" }, -- or require if not used so far
+      after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
+    },
+
+    {
+      "tzachar/cmp-tabnine",
+      config = function()
+        local tabnine = require "cmp_tabnine.config"
+        tabnine:setup {
+          max_lines = 1000,
+          max_num_results = 20,
+          sort = true,
+        }
+      end,
+
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-cmp",
+    },
+
+    {
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("user.neoscroll").config()
+      end,
+    },
+}
+
+
 
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
+
+
+
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
 
+
+
 -- NvimTree
 lvim.builtin.nvimtree.setup.view.width = 60 
 
 
+
 -- nvim-cmp
 -- lvim.builtin.cmp.mapping["<Tab>"] = require'cmp'.mapping.confirm({ select = true, behavior = require'cmp'.ConfirmBehavior.Insert })
-
- 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
   local actions = require "telescope.actions"
@@ -112,6 +207,8 @@ end
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
+
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -123,23 +220,27 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 
-lvim.builtin.which_key.mappings["gf"] = {
+
+lvim.builtin.which_key.mappings["v"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
+  c = { "<cmd>Git commit<cr>", "Git Commit" },
   h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
   u = { "<cmd>diffget //2<cr>", "Diff Get 2" },
   l = { "<cmd>Gclog -- %<cr>", "Gclog For Current File" }
 }
+
+
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 
+
+
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
-
-
 
 
 
@@ -260,52 +361,6 @@ require('lsp-colors').setup{
 }
 
 
-require('trouble').setup{
-    position = "bottom", -- position of the list can be: bottom, top, left, right
-    height = 10, -- height of the trouble list when position is top or bottom
-    width = 50, -- width of the list when position is left or right
-    icons = true, -- use devicons for filenames
-    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-    fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
-    action_keys = { -- key mappings for actions in the trouble list
-        -- map to {} to remove a mapping, for example:
-        -- close = {},
-        close = "q", -- close the list
-        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-        refresh = "r", -- manually refresh
-        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        open_split = { "<c-x>" }, -- open buffer in new split
-        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-        open_tab = { "<c-t>" }, -- open buffer in new tab
-        jump_close = {"o"}, -- jump to the diagnostic and close the list
-        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        toggle_preview = "P", -- toggle auto_preview
-        hover = "K", -- opens a small popup with the full multiline message
-        preview = "p", -- preview the diagnostic location
-        close_folds = {"zM", "zm"}, -- close all folds
-        open_folds = {"zR", "zr"}, -- open all folds
-        toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        previous = "k", -- preview item
-        next = "j" -- next item
-    },
-    indent_lines = true, -- add an indent guide below the fold icons
-    auto_open = false, -- automatically open the list when you have diagnostics
-    auto_close = false, -- automatically close the list when you have no diagnostics
-    auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    auto_fold = false, -- automatically fold a file trouble list at creation
-    signs = {
-        -- icons / text used for a diagnostic
-        error = "",
-        warning = "",
-        hint = "",
-        information = "",
-        other = "﫠"
-    },
-    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-}
-
-
 
 lvim.builtin.nvimtree.icons.git = {
   unstaged = "✗",
@@ -317,93 +372,6 @@ lvim.builtin.nvimtree.icons.git = {
   ignored = "◌",
 }
 
--- Additional Plugins
-lvim.plugins = {
-    {"folke/tokyonight.nvim"},
-   
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
-   
-    {"tpope/vim-fugitive"},
-
-    {"ray-x/lsp_signature.nvim"},
-   
-    {"folke/lsp-colors.nvim"},
-   
-    { 
-      "windwp/nvim-ts-autotag", 
-      event="InsertEnter",
-    },
-  
-    {
-      "phaazon/hop.nvim",
-      config = function()
-        require("user.hop").config()
-      end
-    },
-   
-    { "lukas-reineke/indent-blankline.nvim",
-      config = function()
-        require "user.blankline"
-      end
-    },
-   
-    {
-      "unblevable/quick-scope",
-      config = function()
-        require "user.quickscope"
-      end
-    },
-   
-    {
-      "andymass/vim-matchup",
-      event = "CursorMoved",
-      config = function()
-        require "user.matchup"
-      end
-    },
-
-    {
-      "nacro90/numb.nvim",
-      event = "BufRead",
-      config = function()
-        require("user.numb").config()
-      end,
-    },
-
-    {
-      "abecodes/tabout.nvim",
-      config = function()
-        require("user.tabout").config()
-      end,
-      wants = { "nvim-treesitter" }, -- or require if not used so far
-      after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
-    },
-
-    {
-      "tzachar/cmp-tabnine",
-      config = function()
-        local tabnine = require "cmp_tabnine.config"
-        tabnine:setup {
-          max_lines = 1000,
-          max_num_results = 20,
-          sort = true,
-        }
-      end,
-
-      run = "./install.sh",
-      requires = "hrsh7th/nvim-cmp",
-    },
-
-    {
-      "karb94/neoscroll.nvim",
-      config = function()
-        require("user.neoscroll").config()
-      end,
-    },
-}
 
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
