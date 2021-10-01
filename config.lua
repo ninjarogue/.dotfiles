@@ -65,8 +65,13 @@ vim.cmd("nnoremap ytp vf)y")
 vim.cmd('vnoremap <leader>d "_d')
 lvim.keys.visual_mode["<leader>j"] = "J"
 vim.cmd("xnoremap <leader>p \"_dP")
-vim.cmd("nnoremap cc :Git Commit<cr>")
+vim.cmd("nnoremap cc :Git commit<cr>")
+vim.cmd("nnoremap cp :Git push<cr>")
 vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
+vim.cmd("nnoremap <leader>ww :wq<cr>")
+vim.cmd("nnoremap <S-w> <C-w>")
+vim.cmd("nnoremap <S-u> <C-u>")
+vim.cmd("nnoremap <S-d> <C-d>")
 
 
 -- Additional Plugins
