@@ -8,7 +8,6 @@
 
 
 
--- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "tokyonight"
@@ -43,44 +42,6 @@ vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 
 
 
--- keymappings [view all the defaults by pressing <leader>Lk]
--- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
--- add your own keymapping
-lvim.leader = "space"
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["J"] = "5j"
-lvim.keys.normal_mode["K"] = "5k"
-lvim.keys.normal_mode["<leader>j"] = "J"
-lvim.keys.normal_mode["Y"] = "y$"
-lvim.keys.normal_mode["n"] = "nzzzv"
-lvim.keys.normal_mode["N"] = "Nzzzv"
-lvim.keys.normal_mode["<C-n>"] = ":nohl<CR>"
-lvim.keys.normal_mode["<leader>q"] = ":q<CR>"
-lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
-lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
-vim.cmd('nnoremap Y yg$')
-vim.cmd('nnoremap <leader>d "_d')
-vim.cmd("nnoremap ytp vf)y")
-vim.cmd("nnoremap cc :Git commit<cr>")
-vim.cmd("nnoremap cp :Git push<cr>")
-vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
-vim.cmd("nnoremap <leader>wq :wq<cr>")
-vim.cmd("nnoremap <S-w> <C-w>")
-vim.cmd("nnoremap <S-u> <C-u>")
-vim.cmd("nnoremap <S-d> <C-d>")
-vim.cmd("nnoremap <C-h> <C-w>h")
-vim.cmd("nnoremap <C-j> <C-w>j")
-vim.cmd("nnoremap <C-k> <C-w>k")
-vim.cmd("nnoremap <C-l> <C-w>l")
-vim.cmd("nnoremap oo  o<esc>k")
-vim.cmd("nnoremap OO  O<esc>j")
-
-vim.cmd('vnoremap <leader>d "_d')
-vim.cmd('vnoremap <leader>j J')
-
-vim.cmd("xnoremap <leader>p \"_dP")
-
--- Additional Plugins
 lvim.plugins = {
   {"folke/tokyonight.nvim"},
 
@@ -136,15 +97,6 @@ lvim.plugins = {
     end,
   },
 
-  -- {
-  --   "abecodes/tabout.nvim",
-  --   config = function()
-  --     require("user.tabout").config()
-  --   end,
-  --   wants = { "nvim-treesitter" }, -- or require if not used so far
-  --   after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
-  -- },
-
   {
     "tzachar/cmp-tabnine",
     config = function()
@@ -168,7 +120,59 @@ lvim.plugins = {
   },
 
   { "simrat39/symbols-outline.nvim" }
+
+
+  -- {
+  --   "abecodes/tabout.nvim",
+  --   config = function()
+  --     require("user.tabout").config()
+  --   end,
+  --   wants = { "nvim-treesitter" }, -- or require if not used so far
+  --   after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
+  -- },
+
 }
+
+
+
+-- keymappings [view all the defaults by pressing <leader>Lk]
+-- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
+lvim.leader = "space"
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["J"] = "5j"
+lvim.keys.normal_mode["K"] = "5k"
+lvim.keys.normal_mode["<leader>j"] = "J"
+lvim.keys.normal_mode["Y"] = "y$"
+lvim.keys.normal_mode["n"] = "nzzzv"
+lvim.keys.normal_mode["N"] = "Nzzzv"
+lvim.keys.normal_mode["<C-n>"] = ":nohl<CR>"
+lvim.keys.normal_mode["<leader>q"] = ":q<CR>"
+lvim.keys.normal_mode["H"] = ":BufferPrevious<cr>"
+lvim.keys.normal_mode["L"] = ":BufferNext<cr>"
+vim.cmd('nnoremap Y yg_')
+vim.cmd('nnoremap <leader>d "_d')
+vim.cmd("nnoremap ytp vf)y")
+vim.cmd("nnoremap cc :Git commit<cr>")
+vim.cmd("nnoremap cp :Git push<cr>")
+vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
+vim.cmd("nnoremap <leader>wq :wq<cr>")
+vim.cmd("nnoremap <S-w> <C-w>")
+vim.cmd("nnoremap <C-h> <C-w>h")
+vim.cmd("nnoremap <C-j> <C-w>j")
+vim.cmd("nnoremap <C-k> <C-w>k")
+vim.cmd("nnoremap <C-l> <C-w>l")
+vim.cmd("nnoremap oo  o<esc>k")
+vim.cmd("nnoremap OO  O<esc>j")
+
+vim.cmd('vnoremap <leader>d "_d')
+vim.cmd('vnoremap <leader>j J')
+
+vim.cmd("xnoremap <leader>p \"_dP")
+
+
+
+lvim.builtin.dashboard.active = true
+lvim.builtin.terminal.active = true
 
 
 
@@ -181,6 +185,12 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
+
+
+
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 1
+lvim.builtin.nvimtree.setup.view.width = 60
 lvim.builtin.nvimtree.icons.git = {
   unstaged = "✗",
   staged = "✓",
@@ -196,12 +206,6 @@ require'nvim-treesitter.configs'.setup {
     filetypes = { "html" , "typescriptreact", "javascriptreact" },
   }
 }
-
-
-
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
-lvim.builtin.nvimtree.setup.view.width = 60
 
 
 
@@ -222,7 +226,6 @@ end
 
 
 
--- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -233,6 +236,7 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
+
 lvim.builtin.which_key.mappings["v"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
@@ -241,11 +245,6 @@ lvim.builtin.which_key.mappings["v"] = {
   u = { "<cmd>diffget //2<cr>", "Diff Get 2" },
   l = { "<cmd>Gclog -- %<cr>", "Gclog For Current File" }
 }
-
-
-
-lvim.builtin.dashboard.active = true
-lvim.builtin.terminal.active = true
 
 
 
@@ -322,14 +321,14 @@ end
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
   shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
   timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
-  toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+  toggle_key = '<M-x>' -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 }
 
 require'lsp_signature'.setup(cfg)
 require'lsp_signature'.on_attach(cfg)
 
 
-
+-- Formatters and Linters
 lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
@@ -360,8 +359,6 @@ lvim.autocommands.custom_groups = {
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*", ":PackerLoad nvim-autopairs" },
 }
-
-
 
 vim.cmd [[ autocmd BufWritePre *.tsx %s/\s\+$//e" ]]
 
