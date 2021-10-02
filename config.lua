@@ -1,5 +1,4 @@
 -- lvim is the global options object
-lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
 
 -- Linters should be filled in as strings with either a global executable or a path to an executable
 
@@ -259,7 +258,7 @@ end
 
 
 lvim.builtin.which_key.setup["triggers_blacklist"] = {
-  n = { "w", "o", "O", "g" }
+  n = { "w", "o", "O" }
 }
 
 lvim.builtin.which_key.opts.timeoutlen = 500
