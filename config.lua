@@ -141,6 +141,7 @@ lvim.plugins = {
         highlight_hovered_item = true,
         show_guides = true,
       }
+      require "user.symbols-outline"
     end,
   }
 
@@ -183,8 +184,8 @@ vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-j> <C-w>j")
 vim.cmd("nnoremap <C-k> <C-w>k")
 vim.cmd("nnoremap <C-l> <C-w>l")
-vim.cmd("nnoremap oo  o<esc>k")
-vim.cmd("nnoremap OO  O<esc>j")
+vim.cmd("nnoremap <silent> oo  o<esc>k")
+vim.cmd("nnoremap <silent> OO  O<esc>j")
 vim.cmd("inoremap , ,<c-g>u")
 vim.cmd("inoremap . .<c-g>u")
 vim.cmd("nnoremap cj mzyyp`z")
@@ -265,6 +266,7 @@ lvim.builtin.which_key.opts.timeoutlen = 500
 -- lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
 -- lvim.builtin.which_key.mappings['<leader>p'] = "which_key_ignore"
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["so"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
