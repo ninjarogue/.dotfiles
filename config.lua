@@ -47,7 +47,7 @@ lvim.plugins = {
 
   {
       "folke/trouble.nvim",
-      cmd = "TroubleToggle"
+      cmd = "TroubleToggle",
   },
 
   {"tpope/vim-fugitive"},
@@ -56,34 +56,44 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     config = function()
       require("user.lsp-signature").config()
-    end
+    end,
   },
 
-  {"folke/lsp-colors.nvim"},
+  {
+    "folke/lsp-colors.nvim",
+    config = function()
+      require('lsp-colors').setup{
+        error = "#db4b4b",
+        warning = "#e0af68",
+        information = "#0db9d7",
+        hint = "#10b981",
+      }
+    end,
+  },
 
   {
     "windwp/nvim-ts-autotag",
-    event="InsertEnter"
+    event="InsertEnter",
   },
 
   {
     "phaazon/hop.nvim",
     config = function()
       require("user.hop").config()
-    end
+    end,
   },
 
   { "lukas-reineke/indent-blankline.nvim",
     config = function()
       require "user.blankline"
-    end
+    end,
   },
 
   {
     "unblevable/quick-scope",
     config = function()
       require "user.quickscope"
-    end
+    end,
   },
 
   {
@@ -91,7 +101,7 @@ lvim.plugins = {
     event = "CursorMoved",
     config = function()
       require "user.matchup"
-    end
+    end,
   },
 
   {
@@ -99,7 +109,7 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("user.numb").config()
-    end
+    end,
   },
 
   {
@@ -114,17 +124,25 @@ lvim.plugins = {
     end,
 
     run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp"
+    requires = "hrsh7th/nvim-cmp",
   },
 
   {
     "karb94/neoscroll.nvim",
     config = function()
       require("user.neoscroll").config()
-    end
+    end,
   },
 
-  { "simrat39/symbols-outline.nvim" }
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require('symbols-outline').setup{
+        highlight_hovered_item = true,
+        show_guides = true,
+      }
+    end,
+  }
 
 
   -- {
@@ -171,8 +189,8 @@ vim.cmd("inoremap , ,<c-g>u")
 vim.cmd("inoremap . .<c-g>u")
 vim.cmd("nnoremap cj mzyyp`z")
 vim.cmd("nnoremap ck mzyyP`z")
-vim.cmd('vnoremap <leader>d "_d')
 vim.cmd('nnoremap J mzJ`z')
+vim.cmd('vnoremap <leader>d "_d')
 vim.cmd('xnoremap <leader>p "_dP')
 -- walk back
 vim.cmd('nnoremap <expr> k (v:count > 5 ? "m\'" . v:count : "") . "k"')
@@ -197,6 +215,13 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
 
+require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+    filetypes = { "html" , "typescriptreact", "javascriptreact" },
+  }
+}
+
 
 
 lvim.builtin.nvimtree.side = "left"
@@ -210,12 +235,6 @@ lvim.builtin.nvimtree.icons.git = {
   untracked = "★",
   deleted = "",
   ignored = "◌",
-}
-require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-    filetypes = { "html" , "typescriptreact", "javascriptreact" },
-  }
 }
 
 
@@ -235,8 +254,11 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 end
 
-lvim.builtin.which_key.mappings['w'] = { name = 'which_key_ignore' }
+
+
 lvim.builtin.which_key.opts.timeoutlen = 500
+lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
+lvim.builtin.which_key.mappings['w'] = { name = 'which_key_ignore' }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -259,56 +281,11 @@ lvim.builtin.which_key.mappings["v"] = {
 
 
 
--- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-lvim.lsp.on_attach_callback = function(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
-
-
-
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
-lvim.lsp.null_ls.setup = {
-  root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
-}
--- or if you need something more advanced
-lvim.lsp.null_ls.setup.root_dir = function(fname)
-  if vim.bo.filetype == "javascript" then
-    return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
-      or require("lspconfig/util").path.dirname(fname)
-  elseif vim.bo.filetype == "php" then
-    return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
-  else
-    return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
-  end
-end
-
-
-
 -- Formatters and Linters
 lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
 lvim.format_on_save = false
-
-
-
-require('hop').setup{
-  keys = 'etovxqpdygfblzhckisuran',
-  term_seq_bias = 0.5
-}
-
-require('lsp-colors').setup{
-  error = "#db4b4b",
-  warning = "#e0af68",
-  information = "#0db9d7",
-  hint = "#10b981"
-}
 
 
 
@@ -322,5 +299,38 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*", ":PackerLoad nvim-autopairs" },
 }
 
+
+
 vim.cmd [[ autocmd BufWritePre *.tsx %s/\s\+$//e" ]]
+
+
+
+-- generic LSP settings
+-- you can set a custom on_attach function that will be used for all the language servers
+-- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
+-- lvim.lsp.on_attach_callback = function(client, bufnr)
+--   local function buf_set_option(...)
+--     vim.api.nvim_buf_set_option(bufnr, ...)
+--   end
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
+
+
+
+-- you can overwrite the null_ls setup table (useful for setting the root_dir function)
+-- lvim.lsp.null_ls.setup = {
+--   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
+-- }
+-- -- or if you need something more advanced
+-- lvim.lsp.null_ls.setup.root_dir = function(fname)
+--   if vim.bo.filetype == "javascript" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
+--       or require("lspconfig/util").path.dirname(fname)
+--   elseif vim.bo.filetype == "php" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
+--   else
+--     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
+--   end
+-- end
 

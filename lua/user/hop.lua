@@ -5,7 +5,10 @@ M.config = function()
   if not status_ok then
     return
   end
-  hop.setup()
+  hop.setup{
+    keys = 'etovxqpdygfblzhckisuran',
+    term_seq_bias = 0.5
+  }
   vim.api.nvim_set_keymap("", "s", ":HopChar2<cr>", { silent = true })
   vim.api.nvim_set_keymap("", "S", ":HopWord<cr>", { silent = true })
 end
