@@ -139,9 +139,9 @@ lvim.plugins = {
 -- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
 lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["J"] = "5j"
-lvim.keys.normal_mode["K"] = "5k"
-lvim.keys.normal_mode["<leader>j"] = "J"
+-- lvim.keys.normal_mode["J"] = "5j"
+-- lvim.keys.normal_mode["K"] = "5k"
+-- lvim.keys.normal_mode["<leader>j"] = "J"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
@@ -163,11 +163,18 @@ vim.cmd("nnoremap <C-k> <C-w>k")
 vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd("nnoremap oo  o<esc>k")
 vim.cmd("nnoremap OO  O<esc>j")
-
+vim.cmd("inoremap , ,<c-g>u")
+vim.cmd("inoremap . .<c-g>u")
+vim.cmd("nnoremap cj mzyyp`z")
+vim.cmd("nnoremap ck mzyyP`z")
 vim.cmd('vnoremap <leader>d "_d')
-vim.cmd('vnoremap <leader>j J')
-
-vim.cmd("xnoremap <leader>p \"_dP")
+vim.cmd('nnoremap J mzJ`z')
+vim.cmd('xnoremap <leader>p "_dP')
+-- walk back
+vim.cmd('nnoremap <expr> k (v:count > 5 ? "m\'" . v:count : "") . "k"')
+vim.cmd('nnoremap <expr> j (v:count > 5 ? "m\'" . v:count : "") . "j"')
+vim.cmd('nnoremap <M-j> :m .+1<cr>==')
+vim.cmd('nnoremap <M-k> :m .-2<cr>==')
 
 
 

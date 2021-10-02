@@ -806,6 +806,8 @@ key_bindings:
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
   - { key: X,              mods: Alt,     chars: "\x1bx"        }
+  - { key: J,              mods: Alt,     chars: "\x1bj"        }
+  - { key: K,              mods: Alt,     chars: "\x1bk"        }
 
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
