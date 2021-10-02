@@ -211,6 +211,7 @@ lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.run = ":TSUpdate"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
@@ -258,7 +259,6 @@ end
 
 lvim.builtin.which_key.opts.timeoutlen = 500
 lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
-lvim.builtin.which_key.mappings['w'] = { name = 'which_key_ignore' }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
