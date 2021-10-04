@@ -133,3 +133,5 @@ function set_win_title(){
 }
 precmd_functions+=(set_win_title)
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

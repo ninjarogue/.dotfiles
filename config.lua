@@ -11,6 +11,10 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "tokyonight"
+lvim.lsp.diagnostics.virtual_text = false
+
+
+
 vim.opt.mouse = "a"
 vim.opt.relativenumber = true
 vim.opt.updatetime = 300
@@ -74,6 +78,9 @@ lvim.plugins = {
   {
     "windwp/nvim-ts-autotag",
     event="InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end
   },
 
   {
@@ -143,18 +150,16 @@ lvim.plugins = {
       }
       require "user.symbols-outline"
     end,
-  }
+  },
 
-
-  -- {
-  --   "abecodes/tabout.nvim",
-  --   config = function()
-  --     require("user.tabout").config()
-  --   end,
-  --   wants = { "nvim-treesitter" }, -- or require if not used so far
-  --   after = { "nvim-cmp", "LuaSnip" } -- if a completion plugin is using tabs load it before
-  -- },
-
+  {
+    "sudormrfbin/cheatsheet.nvim",
+    requires = {
+      {"nvim-telescope/telescope.nvim"},
+      {"nvim-lua/popup.nvim"},
+      {"nvim-lua/plenary.nvim"},
+    }
+  },
 }
 
 
@@ -181,15 +186,16 @@ vim.cmd("nnoremap cp :Git push<cr>")
 vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap <C-h> <C-w>h")
+vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-j> <C-w>j")
-vim.cmd("nnoremap <C-k> <C-w>k")
+
 vim.cmd("nnoremap <C-l> <C-w>l")
-vim.cmd("nnoremap <silent> oo  o<esc>k")
-vim.cmd("nnoremap <silent> OO  O<esc>j")
 vim.cmd("inoremap , ,<c-g>u")
 vim.cmd("inoremap . .<c-g>u")
-vim.cmd("nnoremap cj mzyyp`z")
-vim.cmd("nnoremap ck mzyyP`z")
+vim.cmd("nnoremap zj mzyyp`z")
+vim.cmd("nnoremap zk mzyyP`z")
+vim.cmd("vnoremap zj y%p")
+vim.cmd("vnoremap zk y%P")
 vim.cmd('nnoremap J mzJ`z')
 vim.cmd('vnoremap <leader>d "_d')
 vim.cmd('xnoremap <leader>p "_dP')
@@ -200,6 +206,7 @@ vim.cmd('nnoremap <M-j> :m .+1<cr>==')
 vim.cmd('nnoremap <M-k> :m .-2<cr>==')
 
 
+lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
 
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
@@ -250,6 +257,8 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
   lvim.builtin.telescope.defaults.mappings.i["<Tab>"] = actions.file_edit
+  lvim.builtin.telescope.defaults.mappings.i["<C-q>"] = actions.send_to_qflist
+  lvim.builtin.telescope.defaults.mappings.i["q"] = actions.close
   -- for normal mode
   lvim.builtin.telescope.defaults.mappings.n["l"] = actions.file_edit
   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
@@ -259,7 +268,7 @@ end
 
 
 lvim.builtin.which_key.setup["triggers_blacklist"] = {
-  n = { "w", "o", "O" }
+  n = { "w", "c" }
 }
 
 lvim.builtin.which_key.opts.timeoutlen = 500
@@ -305,8 +314,6 @@ lvim.autocommands.custom_groups = {
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*", ":PackerLoad nvim-autopairs" },
 }
-
-
 
 vim.cmd [[ autocmd BufWritePre *.tsx %s/\s\+$//e" ]]
 
