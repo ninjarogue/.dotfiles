@@ -67,7 +67,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  #opacity: 1.0
+  opacity: 0.5
 
   # Startup Mode (changes require restart)
   #
@@ -117,7 +117,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Hack Nerd Font Mono 
+    family: Hack Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -178,7 +178,7 @@ font:
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
   #use_thin_strokes: true
-  
+
   schemes:
   # Tokyo Night theme, based on both:
   #   https://github.com/ghifarit53/tokyonight-vim

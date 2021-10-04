@@ -28,7 +28,7 @@ vim.opt.joinspaces = false
 vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.cursorline = true
-vim.opt.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.spell = false
 vim.opt.wrap = false
 vim.opt.completeopt = { "menuone", "noselect" }
@@ -43,6 +43,7 @@ vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
+lvim.transparent_window = "true" -- the encoding written to a file
 
 
 
@@ -181,9 +182,9 @@ lvim.keys.normal_mode["wq"] = ":wq<CR>"
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
 vim.cmd("nnoremap ytp vf)y")
-vim.cmd("nnoremap cc :Git commit<cr>")
-vim.cmd("nnoremap cp :Git push<cr>")
-vim.cmd("nnoremap dv :Gitvdiffsplit<cr>")
+vim.cmd("nnoremap cc :Git commit<CR>")
+vim.cmd("nnoremap cp :Git push<CR>")
+vim.cmd("nnoremap dv :Gitvdiffsplit<CR>")
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-h> <C-w>h")
@@ -219,17 +220,9 @@ lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.run = ":TSUpdate"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.indent.enable = true
-
-require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-    filetypes = { "html" , "typescriptreact", "javascriptreact" },
-  }
-}
 
 
 
@@ -258,7 +251,7 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
   lvim.builtin.telescope.defaults.mappings.i["<Tab>"] = actions.file_edit
   lvim.builtin.telescope.defaults.mappings.i["<C-q>"] = actions.send_to_qflist
-  lvim.builtin.telescope.defaults.mappings.i["q"] = actions.close
+  lvim.builtin.telescope.defaults.mappings.i["<Esc>"] = actions.close
   -- for normal mode
   lvim.builtin.telescope.defaults.mappings.n["l"] = actions.file_edit
   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
@@ -289,10 +282,9 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.which_key.mappings["v"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
-  c = { "<cmd>Git commit<cr>", "Git Commit" },
   h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
   u = { "<cmd>diffget //2<cr>", "Diff Get 2" },
-  l = { "<cmd>Gclog -- %<cr>", "Gclog For Current File" }
+  p = { "<cmd>Git push<CR>", "Push" }
 }
 
 
@@ -315,7 +307,7 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*", ":PackerLoad nvim-autopairs" },
 }
 
-vim.cmd [[ autocmd BufWritePre *.tsx %s/\s\+$//e" ]]
+vim.cmd [[ autocmd BufWritePre * %s/\s\+$//e" ]]
 
 
 
