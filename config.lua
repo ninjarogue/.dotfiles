@@ -14,7 +14,6 @@ lvim.colorscheme = "tokyonight"
 lvim.lsp.diagnostics.virtual_text = false
 
 
-
 vim.opt.mouse = "a"
 vim.opt.relativenumber = true
 vim.opt.updatetime = 300
@@ -27,7 +26,7 @@ vim.opt.shiftwidth = 2
 vim.opt.joinspaces = false
 vim.opt.undofile = true
 vim.opt.tabstop = 2
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.spell = false
 vim.opt.wrap = false
@@ -128,7 +127,7 @@ lvim.plugins = {
         max_lines = 1000,
         max_num_results = 20,
         sort = true
-    }
+      }
     end,
 
     run = "./install.sh",
@@ -193,6 +192,8 @@ vim.cmd("nnoremap <C-j> <C-w>j")
 vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd("inoremap , ,<c-g>u")
 vim.cmd("inoremap . .<c-g>u")
+vim.cmd("inoremap ? ?<c-g>u")
+vim.cmd("inoremap <C-e> <C-o>a")
 vim.cmd("nnoremap zj mzyyp`z")
 vim.cmd("nnoremap zk mzyyP`z")
 vim.cmd("vnoremap zj y%p")
@@ -211,8 +212,8 @@ lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = tr
 
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
-
-
+lvim.builtin.lualine.active = true
+lvim.builtin.bufferline.active = true
 
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
@@ -268,7 +269,7 @@ lvim.builtin.which_key.opts.timeoutlen = 500
 -- lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
 -- lvim.builtin.which_key.mappings['<leader>p'] = "which_key_ignore"
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["so"] = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" }
+lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -278,8 +279,7 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
-
-lvim.builtin.which_key.mappings["v"] = {
+lvim.builtin.which_key.mappings.g["g"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
   h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
