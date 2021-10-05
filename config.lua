@@ -10,8 +10,10 @@
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "gruvbox-material"
 lvim.lsp.diagnostics.virtual_text = false
+
+vim.g.gruvbox_material_transparent_background = 1
 
 
 vim.opt.mouse = "a"
@@ -42,12 +44,15 @@ vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
-lvim.transparent_window = "true" -- the encoding written to a file
+
+lvim.transparent_window = "true"
 
 
 
 lvim.plugins = {
-  {"folke/tokyonight.nvim"},
+  { "folke/tokyonight.nvim" },
+
+  { "sainnhe/gruvbox-material" },
 
   {
       "folke/trouble.nvim",
@@ -181,8 +186,8 @@ lvim.keys.normal_mode["wq"] = ":wq<CR>"
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
 vim.cmd("nnoremap ytp vf)y")
-vim.cmd("nnoremap cc :Git commit<CR>")
-vim.cmd("nnoremap cp :Git push<CR>")
+-- vim.cmd("nnoremap cc :Git commit<CR>")
+-- vim.cmd("nnoremap cp :Git push<CR>")
 vim.cmd("nnoremap dv :Gitvdiffsplit<CR>")
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap <C-h> <C-w>h")
@@ -213,6 +218,7 @@ lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = tr
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.lualine.active = true
+lvim.builtin.lualine.options.theme = "gruvbox"
 lvim.builtin.bufferline.active = true
 
 -- Treesitter
@@ -259,7 +265,7 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 end
 
-
+lvim.builtin.terminal.execs = { }
 
 lvim.builtin.which_key.setup["triggers_blacklist"] = {
   n = { "w", "c" }
@@ -283,8 +289,9 @@ lvim.builtin.which_key.mappings.g["g"] = {
   name = 'Vim Fugitive',
   s = { "<cmd>G<cr>", "Git Status" },
   h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
-  u = { "<cmd>diffget //2<cr>", "Diff Get 2" },
-  p = { "<cmd>Git push<CR>", "Push" }
+  l = { "<cmd>diffget //2<cr>", "Diff Get 2" },
+  c = { "<cmd>Git commit<CR>", "Git Commit" },
+  p = { "<cmd>Git push<CR>", "Git Push" }
 }
 
 
