@@ -34,6 +34,7 @@ vim.opt.spell = false
 vim.opt.wrap = false
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.clipboard = "unnamedplus"
+vim.opt.confirm = true
 vim.opt.backup = false -- creates a backup file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
@@ -171,39 +172,41 @@ lvim.plugins = {
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 -- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
+--
+vim.cmd("inoremap , ,<c-g>u")
+vim.cmd("inoremap . .<c-g>u")
+vim.cmd("inoremap ? ?<c-g>u")
+lvim.keys.insert_mode["jk"] = "<C-o>a"
+
 lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
-lvim.keys.normal_mode["<C-n>"] = ":nohl<CR>"
+lvim.keys.normal_mode["<C-n>"] = ":nohlsearch<CR>"
 lvim.keys.normal_mode["H"] = ":BufferPrevious<CR>"
 lvim.keys.normal_mode["L"] = ":BufferNext<CR>"
 lvim.keys.normal_mode["<leader>q"] = ":q<CR>"
 lvim.keys.normal_mode["<leader>w"] = ":w<CR>"
 lvim.keys.normal_mode["wq"] = ":wq<CR>"
-
+lvim.keys.normal_mode["<leader>j"] = "mzJ`z'"
+lvim.keys.normal_mode["J"] = "5j"
+lvim.keys.normal_mode["K"] = "5k"
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
-vim.cmd("nnoremap ytp vf)y")
--- vim.cmd("nnoremap cc :Git commit<CR>")
+lvim.keys.normal_mode["cc"] = ":Git commit<CR>"
 -- vim.cmd("nnoremap cp :Git push<CR>")
-vim.cmd("nnoremap dv :Gitvdiffsplit<CR>")
+lvim.keys.normal_mode["dv"] = ":Gitvdiffsplit<CR>"
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-j> <C-w>j")
 
 vim.cmd("nnoremap <C-l> <C-w>l")
-vim.cmd("inoremap , ,<c-g>u")
-vim.cmd("inoremap . .<c-g>u")
-vim.cmd("inoremap ? ?<c-g>u")
-vim.cmd("inoremap <C-e> <C-o>a")
 vim.cmd("nnoremap zj mzyyp`z")
 vim.cmd("nnoremap zk mzyyP`z")
 vim.cmd("vnoremap zj y%p")
 vim.cmd("vnoremap zk y%P")
-vim.cmd('nnoremap J mzJ`z')
 vim.cmd('vnoremap <leader>d "_d')
 vim.cmd('xnoremap <leader>p "_dP')
 -- walk back
@@ -212,6 +215,8 @@ vim.cmd('nnoremap <expr> j (v:count > 5 ? "m\'" . v:count : "") . "j"')
 vim.cmd('nnoremap <M-j> :m .+1<cr>==')
 vim.cmd('nnoremap <M-k> :m .-2<cr>==')
 
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', '<C-p>',  [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts) -- ripgrep string
 
 lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
 
@@ -268,13 +273,17 @@ end
 lvim.builtin.terminal.execs = { }
 
 lvim.builtin.which_key.setup["triggers_blacklist"] = {
-  n = { "w", "c" }
+  n = { "w", "c", "j" }
 }
 
 lvim.builtin.which_key.opts.timeoutlen = 500
 -- lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
 -- lvim.builtin.which_key.mappings['<leader>p'] = "which_key_ignore"
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["r"] = {
+  name = "Quick Grep",
+  g = { [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts }
+}
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",

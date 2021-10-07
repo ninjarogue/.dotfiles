@@ -11,13 +11,13 @@ ctrl + alt - k : yabai -m window --warp north
 ctrl + alt - l : yabai -m window --warp east
 
 # Resize windows
-lctrl + shift + alt - h : yabai -m window --resize left:-50:0; \
+shift + alt - h : yabai -m window --resize left:-50:0; \
                   yabai -m window --resize right:-50:0
-lctrl + shift + alt - j : yabai -m window --resize bottom:0:50; \
+shift + alt - j : yabai -m window --resize bottom:0:50; \
                   yabai -m window --resize top:0:50
-lctrl + shift + alt - k : yabai -m window --resize top:0:-50; \
+shift + alt - k : yabai -m window --resize top:0:-50; \
                   yabai -m window --resize bottom:0:-50
-lctrl + shift + alt - l : yabai -m window --resize right:50:0; \
+shift + alt - l : yabai -m window --resize right:50:0; \
                   yabai -m window --resize left:50:0
 
 
@@ -40,7 +40,7 @@ alt - 5 : yabai -m window --space 5 && yabai -m space --focus 5
 alt - 6 : yabai -m window --space 6 && yabai -m space --focus 6
 
 # Kill a container
-shift + alt - q : yabai -m window --close
+# shift + alt - q : yabai -m window --close
 
 # Float or unfloat a window
 #shift + ctrl - space : yabai -m window --toggle float
@@ -97,16 +97,16 @@ ctrl + shift - j : yabai -m window first --swap next && yabai -m window first --
 ctrl + shift - k : yabai -m window first --swap last && yabai -m window first --swap  next
 
 # fast focus desktop
-cmd + alt - x : yabai -m space --focus recent
-cmd + alt - z : yabai -m space --focus prev || skhd -k "ctrl + alt + cmd - z"
-cmd + alt - c : yabai -m space --focus next || skhd -k "ctrl + alt + cmd - c"
-cmd + alt - 1 : yabai -m space --focus  1 || skhd -k "ctrl + alt + cmd - 1"
-cmd + alt - 2 : yabai -m space --focus  2 || skhd -k "ctrl + alt + cmd - 2"
-cmd + alt - 3 : yabai -m space --focus  3 || skhd -k "ctrl + alt + cmd - 3"
-cmd + alt - 4 : yabai -m space --focus  4 || skhd -k "ctrl + alt + cmd - 4"
-cmd + alt - 5 : yabai -m space --focus  5 || skhd -k "ctrl + alt + cmd - 5"
-cmd + alt - 6 : yabai -m space --focus  6 || skhd -k "ctrl + alt + cmd - 6"
-cmd + alt - 7 : yabai -m space --focus  7 || skhd -k "ctrl + alt + cmd - 7"
-cmd + alt - 8 : yabai -m space --focus  8 || skhd -k "ctrl + alt + cmd - 8"
-cmd + alt - 9 : yabai -m space --focus  9 || skhd -k "ctrl + alt + cmd - 9"
-cmd + alt - 0 : yabai -m space --focus 10 || skhd -k "ctrl + alt + cmd - 0"
+# cmd + alt - x : yabai -m space --focus recent
+# cmd + alt - z : yabai -m space --focus prev || skhd -k "ctrl + alt + cmd - z"
+# cmd + alt - c : yabai -m space --focus next || skhd -k "ctrl + alt + cmd - c"
+# cmd + alt - 1 : yabai -m space --focus  1 || skhd -k "ctrl + alt + cmd - 1"
+# cmd + alt - 2 : yabai -m space --focus  2 || skhd -k "ctrl + alt + cmd - 2"
+# cmd + alt - 3 : yabai -m space --focus  3 || skhd -k "ctrl + alt + cmd - 3"
+# cmd + alt - 4 : yabai -m space --focus  4 || skhd -k "ctrl + alt + cmd - 4"
+# cmd + alt - 5 : yabai -m space --focus  5 || skhd -k "ctrl + alt + cmd - 5"
+# cmd + alt - 6 : yabai -m space --focus  6 || skhd -k "ctrl + alt + cmd - 6"
+# cmd + alt - 7 : yabai -m space --focus  7 || skhd -k "ctrl + alt + cmd - 7"
+# cmd + alt - 8 : yabai -m space --focus  8 || skhd -k "ctrl + alt + cmd - 8"
+# cmd + alt - 9 : yabai -m space --focus  9 || skhd -k "ctrl + alt + cmd - 9"
+# cmd + alt - 0 : yabai -m space --focus 10 || skhd -k "ctrl + alt + cmd - 0"
