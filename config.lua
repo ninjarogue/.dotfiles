@@ -192,17 +192,17 @@ lvim.keys.normal_mode["wq"] = ":wq<CR>"
 lvim.keys.normal_mode["<leader>j"] = "mzJ`z'"
 lvim.keys.normal_mode["J"] = "5j"
 lvim.keys.normal_mode["K"] = "5k"
+lvim.keys.normal_mode["<leader>="] = ":norm ggVG=``<CR>"
+vim.cmd("nnoremap <C-h> <C-w>h")
+vim.cmd("nnoremap <C-j> <C-w>j")
+vim.cmd("nnoremap <C-k> <C-w>k")
+vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
 lvim.keys.normal_mode["cc"] = ":Git commit<CR>"
 -- vim.cmd("nnoremap cp :Git push<CR>")
 lvim.keys.normal_mode["dv"] = ":Gitvdiffsplit<CR>"
 vim.cmd("nnoremap <S-w> <C-w>")
-vim.cmd("nnoremap <C-h> <C-w>h")
-vim.cmd("nnoremap <C-h> <C-w>h")
-vim.cmd("nnoremap <C-j> <C-w>j")
-
-vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd("nnoremap zj mzyyp`z")
 vim.cmd("nnoremap zk mzyyP`z")
 vim.cmd("vnoremap zj y%p")
@@ -264,10 +264,15 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<Tab>"] = actions.file_edit
   lvim.builtin.telescope.defaults.mappings.i["<C-q>"] = actions.send_to_qflist
   lvim.builtin.telescope.defaults.mappings.i["<Esc>"] = actions.close
+  lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.add_selection
+  lvim.builtin.telescope.defaults.mappings.i["<C-z>"] = actions.remove_selection
   -- for normal mode
   lvim.builtin.telescope.defaults.mappings.n["l"] = actions.file_edit
   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+  lvim.builtin.telescope.defaults.mappings.n["<C-a>"] = actions.add_selection
+  lvim.builtin.telescope.defaults.mappings.n["<C-z>"] = actions.remove_selection
+  lvim.builtin.telescope.defaults.mappings.n["<C-c>"] = actions.close
 end
 
 lvim.builtin.terminal.execs = { }
@@ -277,30 +282,37 @@ lvim.builtin.which_key.setup["triggers_blacklist"] = {
 }
 
 lvim.builtin.which_key.opts.timeoutlen = 500
--- lvim.builtin.which_key.mappings['w'] = "which_key_ignore"
--- lvim.builtin.which_key.mappings['<leader>p'] = "which_key_ignore"
+
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+
 lvim.builtin.which_key.mappings["r"] = {
   name = "Quick Grep",
   g = { [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts }
 }
+
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
+
+
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Document Diagnostics" },
+  r = { "<cmd>Trouble lsp_references<CR>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<CR>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<CR>", "Document Diagnostics" },
   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<CR>", "Workspace Diagnostics" },
 }
-lvim.builtin.which_key.mappings.g["g"] = {
-  name = 'Vim Fugitive',
-  s = { "<cmd>G<cr>", "Git Status" },
+
+
+
+lvim.builtin.which_key.mappings["v"] = {
+  name = "Vim Fugitive",
+  s = { "<cmd>G<CR>", "Git Status"},
+  c = { "<cmd>Git commit<CR>", "Git Commit"},
+  p = { "<cmd>Git push<CR>", "Git Push"},
   h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
-  l = { "<cmd>diffget //2<cr>", "Diff Get 2" },
-  c = { "<cmd>Git commit<CR>", "Git Commit" },
-  p = { "<cmd>Git push<CR>", "Git Push" }
+  l = { "<cmd>diffget //2<cr>", "Diff Get 2" }
 }
 
 
@@ -309,6 +321,7 @@ lvim.builtin.which_key.mappings.g["g"] = {
 lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = { { exe = "eslint_d" } }
+lvim.lang.lua.linters = { { exe = "luacheck" } }
 lvim.format_on_save = false
 
 
