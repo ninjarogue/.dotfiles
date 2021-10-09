@@ -56,8 +56,8 @@ lvim.plugins = {
   { "sainnhe/gruvbox-material" },
 
   {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
   },
 
   {"tpope/vim-fugitive"},
