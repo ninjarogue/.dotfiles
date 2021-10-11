@@ -224,8 +224,8 @@ lvim.builtin.lualine.active = true
 lvim.builtin.lualine.options.theme = "gruvbox"
 lvim.builtin.bufferline.active = true
 lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
-
-
+lvim.builtin.cmp.mapping['<C-j>'] = require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert })
+lvim.builtin.cmp.mapping['<C-k>'] = require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert })
 
 require('user.which-key');
 require('user.telescope');
