@@ -12,8 +12,9 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "gruvbox-material"
 lvim.lsp.diagnostics.virtual_text = false
-
+lvim.transparent_window = "true"
 vim.g.gruvbox_material_transparent_background = 1
+
 
 
 vim.opt.mouse = "a"
@@ -46,8 +47,6 @@ vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 
-lvim.transparent_window = "true"
-
 
 
 lvim.plugins = {
@@ -61,6 +60,8 @@ lvim.plugins = {
   },
 
   {"tpope/vim-fugitive"},
+
+  {"tpope/vim-surround"},
 
   {
     "ray-x/lsp_signature.nvim",
@@ -83,7 +84,7 @@ lvim.plugins = {
 
   {
     "windwp/nvim-ts-autotag",
-    event="InsertEnter",
+    event="BufReadPre",
     config = function()
       require("nvim-ts-autotag").setup()
     end
@@ -97,6 +98,7 @@ lvim.plugins = {
   },
 
   { "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
     config = function()
       require "user.blankline"
     end,
@@ -149,6 +151,7 @@ lvim.plugins = {
 
   {
     "simrat39/symbols-outline.nvim",
+    cmd = { "SymbolsOutline" },
     config = function()
       require('symbols-outline').setup{
         highlight_hovered_item = true,
@@ -170,14 +173,11 @@ lvim.plugins = {
 
 
 
--- keymappings [view all the defaults by pressing <leader>Lk]
 -- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
---
 vim.cmd("inoremap , ,<c-g>u")
 vim.cmd("inoremap . .<c-g>u")
 vim.cmd("inoremap ? ?<c-g>u")
 lvim.keys.insert_mode["jk"] = "<C-o>a"
-
 lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
@@ -192,7 +192,7 @@ lvim.keys.normal_mode["wq"] = ":wq<CR>"
 lvim.keys.normal_mode["<leader>j"] = "mzJ`z'"
 lvim.keys.normal_mode["J"] = "5j"
 lvim.keys.normal_mode["K"] = "5k"
-lvim.keys.normal_mode["<leader>="] = ":norm ggVG=``<CR>"
+lvim.keys.normal_mode["<leader>="] = "ggVG=``<CR>"
 vim.cmd("nnoremap <C-h> <C-w>h")
 vim.cmd("nnoremap <C-j> <C-w>j")
 vim.cmd("nnoremap <C-k> <C-w>k")
@@ -200,7 +200,6 @@ vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
 lvim.keys.normal_mode["cc"] = ":Git commit<CR>"
--- vim.cmd("nnoremap cp :Git push<CR>")
 lvim.keys.normal_mode["dv"] = ":Gitvdiffsplit<CR>"
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap zj mzyyp`z")
@@ -215,105 +214,23 @@ vim.cmd('nnoremap <expr> j (v:count > 5 ? "m\'" . v:count : "") . "j"')
 vim.cmd('nnoremap <M-j> :m .+1<cr>==')
 vim.cmd('nnoremap <M-k> :m .-2<cr>==')
 
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '<C-p>',  [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts) -- ripgrep string
 
-lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
+-- what does this do again?
+lvim.builtin.terminal.execs = { }
 
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.lualine.active = true
 lvim.builtin.lualine.options.theme = "gruvbox"
 lvim.builtin.bufferline.active = true
-
--- Treesitter
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.autotag.enable = true
-lvim.builtin.treesitter.playground.enable = true
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.indent.enable = true
+lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
 
 
 
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
-lvim.builtin.nvimtree.setup.view.width = 60
-lvim.builtin.nvimtree.icons.git = {
-  unstaged = "✗",
-  staged = "✓",
-  unmerged = "",
-  renamed = "➜",
-  untracked = "★",
-  deleted = "",
-  ignored = "◌",
-}
-
-
-
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
-lvim.builtin.telescope.on_config_done = function()
-  local actions = require "telescope.actions"
-  -- for input mode
-  lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
-  lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
-  lvim.builtin.telescope.defaults.mappings.i["<Tab>"] = actions.file_edit
-  lvim.builtin.telescope.defaults.mappings.i["<C-q>"] = actions.send_to_qflist
-  lvim.builtin.telescope.defaults.mappings.i["<Esc>"] = actions.close
-  lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.add_selection
-  lvim.builtin.telescope.defaults.mappings.i["<C-z>"] = actions.remove_selection
-  -- for normal mode
-  lvim.builtin.telescope.defaults.mappings.n["l"] = actions.file_edit
-  lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
-  lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
-  lvim.builtin.telescope.defaults.mappings.n["<C-a>"] = actions.add_selection
-  lvim.builtin.telescope.defaults.mappings.n["<C-z>"] = actions.remove_selection
-  lvim.builtin.telescope.defaults.mappings.n["<C-c>"] = actions.close
-end
-
-lvim.builtin.terminal.execs = { }
-
-lvim.builtin.which_key.setup["triggers_blacklist"] = {
-  n = { "w", "c", "j" }
-}
-
-lvim.builtin.which_key.opts.timeoutlen = 500
-
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-
-lvim.builtin.which_key.mappings["r"] = {
-  name = "Quick Grep",
-  g = { [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts }
-}
-
-lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
-
-
-
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<CR>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<CR>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<CR>", "Document Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<CR>", "Workspace Diagnostics" },
-}
-
-
-
-lvim.builtin.which_key.mappings["v"] = {
-  name = "Vim Fugitive",
-  s = { "<cmd>G<CR>", "Git Status"},
-  c = { "<cmd>Git commit<CR>", "Git Commit"},
-  p = { "<cmd>Git push<CR>", "Git Push"},
-  h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
-  l = { "<cmd>diffget //2<cr>", "Diff Get 2" }
-}
+require('user.which-key');
+require('user.telescope');
+require('user.treesitter');
+require('user.nvimtree');
 
 
 
@@ -337,35 +254,4 @@ lvim.autocommands.custom_groups = {
 }
 
 vim.cmd [[ autocmd BufWritePre * %s/\s\+$//e" ]]
-
-
-
--- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
-
-
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- -- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
 
