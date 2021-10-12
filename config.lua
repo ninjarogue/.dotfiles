@@ -199,8 +199,6 @@ vim.cmd("nnoremap <C-k> <C-w>k")
 vim.cmd("nnoremap <C-l> <C-w>l")
 vim.cmd('nnoremap Y yg_')
 vim.cmd('nnoremap <leader>d "_d')
-lvim.keys.normal_mode["cc"] = ":Git commit<CR>"
-lvim.keys.normal_mode["dv"] = ":Gitvdiffsplit<CR>"
 vim.cmd("nnoremap <S-w> <C-w>")
 vim.cmd("nnoremap zj mzyyp`z")
 vim.cmd("nnoremap zk mzyyP`z")
@@ -226,7 +224,7 @@ lvim.builtin.bufferline.active = true
 lvim.builtin.cmp.mapping['<Tab>'] = require("cmp").mapping.confirm({ select = true })
 
 
-
+-- remaps and misc settings
 require('user.which-key');
 require('user.telescope');
 require('user.treesitter');

@@ -18,13 +18,14 @@ lvim.builtin.which_key.mappings["t"] = {
 
 
 
-lvim.builtin.which_key.mappings["v"] = {
+lvim.builtin.which_key.mappings["d"] = {
   name = "Vim Fugitive",
-  s = { "<cmd>G<CR>", "Git Status"},
   c = { "<cmd>Git commit<CR>", "Git Commit"},
+  h = { "<cmd>diffget //3<cr>", "Diff Get 2" },
+  l = { "<cmd>diffget //2<cr>", "Diff Get 3" },
   p = { "<cmd>Git push<CR>", "Git Push"},
-  h = { "<cmd>diffget //3<cr>", "Diff Get 3" },
-  l = { "<cmd>diffget //2<cr>", "Diff Get 2" }
+  s = { "<cmd>G<CR>", "Git Status"},
+  v = { "<cmd>Gitvdiffsplit<CR>"},
 }
 
 

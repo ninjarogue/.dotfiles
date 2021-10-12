@@ -72,6 +72,12 @@ export ZSH="/Users/jiangthang/.oh-my-zsh"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+ZSH_AUTOSUGGEST_USE_ASYNC="true"
+
+source /opt/homebrew/share/antigen/antigen.zsh
+
+antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -81,12 +87,26 @@ export ZSH="/Users/jiangthang/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+
+
+VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
+
+
+
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Tell Antigen that you're done.
+antigen apply
+
+
+
 plugins=(
   git
-  zsh-autosuggestions
-  zsh-vi-mode
+  web-search
 )
 source $ZSH/oh-my-zsh.sh
+
+
 
 # User configuration
 
@@ -119,12 +139,13 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/Users/jiangthang/.local/bin/lvim:$PATH"
 export PATH=/opt/homebrew/bin:$PATH
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
+
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
-
 
 eval "$(starship init zsh)"
 
