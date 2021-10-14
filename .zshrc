@@ -72,6 +72,8 @@ export ZSH="/Users/jiangthang/.oh-my-zsh"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+
+# auto-start tmux when terminal opens
 ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
 source /opt/homebrew/share/antigen/antigen.zsh
@@ -147,7 +149,11 @@ export NVM_DIR="$HOME/.nvm"
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
+
 eval "$(starship init zsh)"
+
+
 
 function set_win_title(){
   echo -ne "\033]0; $(basename "$PWD") \007"
@@ -155,4 +161,13 @@ function set_win_title(){
 precmd_functions+=(set_win_title)
 
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
+if [ -z "$TMUX" ]
+then
+  tmux attach -t base || tmux new -s base
+fi
+

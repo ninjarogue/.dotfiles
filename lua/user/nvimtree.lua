@@ -1,6 +1,3 @@
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
-lvim.builtin.nvimtree.setup.view.width = 60
 lvim.builtin.nvimtree.icons.git = {
   unstaged = "✗",
   staged = "✓",
@@ -10,4 +7,8 @@ lvim.builtin.nvimtree.icons.git = {
   deleted = "",
   ignored = "◌",
 }
+
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 1
+lvim.builtin.nvimtree.setup.view.width = 60
 

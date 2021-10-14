@@ -4,7 +4,9 @@ lvim.builtin.which_key.setup["triggers_blacklist"] = {
   n = { "w", "c", "j" }
 }
 
-
+lvim.builtin.which_key.mappings['='] = 'which_key_ignore'
+lvim.builtin.which_key.mappings['j'] = 'which_key_ignore'
+lvim.builtin.which_key.mappings['?'] = { '<cmd>Cheatsheet<CR>', 'Cheatsheet' }
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -20,24 +22,17 @@ lvim.builtin.which_key.mappings["t"] = {
 
 lvim.builtin.which_key.mappings["d"] = {
   name = "Vim Fugitive",
-  c = { "<cmd>Git commit<CR>", "Git Commit"},
-  h = { "<cmd>diffget //3<cr>", "Diff Get 2" },
-  l = { "<cmd>diffget //2<cr>", "Diff Get 3" },
+  -- c = { "<cmd>Git commit<CR>", "Git Commit"},
+  l = { "<cmd>diffget //3<cr>", "Diff Get 2" },
+  h = { "<cmd>diffget //2<cr>", "Diff Get 3" },
   p = { "<cmd>Git push<CR>", "Git Push"},
   s = { "<cmd>G<CR>", "Git Status"},
-  v = { "<cmd>Gitvdiffsplit<CR>"},
-}
-
-
-
-local opts = { noremap = true, silent = true }
-lvim.builtin.which_key.mappings["r"] = {
-  name = "Quick Grep",
-  g = { [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts }
+  -- v = { "<cmd>Gitvdiffsplit<CR>"},
 }
 
 
 
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
+lvim.builtin.which_key.mappings.s.s = { '<cmd>setlocal spell!<CR>', "Toggle Spellchecking" }
 

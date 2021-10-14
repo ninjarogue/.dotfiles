@@ -1,26 +1,29 @@
--- lvim is the global options object
-
--- Linters should be filled in as strings with either a global executable or a path to an executable
+-- lvim is the global options object Linters should be filled in as strings with either a global executable or a path to an executable
 
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+local opts = {noremap=true, silent=true}
+local function map(mode, key, mapping) vim.api.nvim_set_keymap(mode, key, mapping, opts) end
 
 
 
-lvim.log.level = "warn"
-lvim.format_on_save = true
-lvim.colorscheme = "gruvbox-material"
-lvim.lsp.diagnostics.virtual_text = false
+lvim.leader = "space"
 lvim.transparent_window = "true"
-vim.g.gruvbox_material_transparent_background = 1
+lvim.log.level = "warn"
+lvim.lsp.diagnostics.virtual_text = false
 
 
 
-vim.opt.mouse = "a"
+lvim.colorscheme = "gruvbox-flat"
+
+
+-- set options
+vim.api.nvim_set_option('hid', true)
+vim.api.swapfile = false
+vim.opt.mouse = 'a'
 vim.opt.relativenumber = true
 vim.opt.updatetime = 300
-vim.opt.swapfile = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.expandtab = true
@@ -53,6 +56,8 @@ lvim.plugins = {
   { "folke/tokyonight.nvim" },
 
   { "sainnhe/gruvbox-material" },
+
+  { 'eddyekofo94/gruvbox-flat.nvim' },
 
   {
     "folke/trouble.nvim",
@@ -97,25 +102,25 @@ lvim.plugins = {
     end,
   },
 
-  { "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+  { 'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
     config = function()
-      require "user.blankline"
+      require 'user.blankline'
     end,
   },
 
   {
-    "unblevable/quick-scope",
+    'unblevable/quick-scope',
     config = function()
-      require "user.quickscope"
+      require 'user.quickscope'
     end,
   },
 
   {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
+    'andymass/vim-matchup',
+    event = 'CursorMoved',
     config = function()
-      require "user.matchup"
+      require 'user.matchup'
     end,
   },
 
@@ -128,9 +133,9 @@ lvim.plugins = {
   },
 
   {
-    "tzachar/cmp-tabnine",
+    'tzachar/cmp-tabnine',
     config = function()
-      local tabnine = require "cmp_tabnine.config"
+      local tabnine = require 'cmp_tabnine.config'
       tabnine:setup {
         max_lines = 1000,
         max_num_results = 20,
@@ -138,27 +143,13 @@ lvim.plugins = {
       }
     end,
 
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
+    run = './install.sh',
+    requires = 'hrsh7th/nvim-cmp',
   },
 
   {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("user.neoscroll").config()
-    end,
-  },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = { "SymbolsOutline" },
-    config = function()
-      require('symbols-outline').setup{
-        highlight_hovered_item = true,
-        show_guides = true,
-      }
-      require "user.symbols-outline"
-    end,
+    'simrat39/symbols-outline.nvim',
+    cmd = { 'SymbolsOutline' },
   },
 
   {
@@ -174,15 +165,18 @@ lvim.plugins = {
 
 
 -- unmap a default keymapping lvim.keys.normal_mode["<C-Up>"] = ""
-vim.cmd("inoremap , ,<c-g>u")
-vim.cmd("inoremap . .<c-g>u")
-vim.cmd("inoremap ? ?<c-g>u")
-lvim.keys.insert_mode["jk"] = "<C-o>a"
-lvim.leader = "space"
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["Y"] = "y$"
-lvim.keys.normal_mode["n"] = "nzzzv"
-lvim.keys.normal_mode["N"] = "Nzzzv"
+map('i', ',', ',<C-g>u')
+map('i', '.', '.<C-g>u')
+map('i', '?', '?<C-g>u')
+map('n', '<C-s>', ':w<CR>')
+map('n', 'Y', 'yg_')
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', '0', '^')
+map('v', ')', 'f)')
+map('v', '}', 'f}')
+map('v', '}', 'f}')
+lvim.keys.insert_mode['jk'] = '<C-o>a'
 lvim.keys.normal_mode["<C-n>"] = ":nohlsearch<CR>"
 lvim.keys.normal_mode["H"] = ":BufferPrevious<CR>"
 lvim.keys.normal_mode["L"] = ":BufferNext<CR>"
@@ -213,21 +207,23 @@ vim.cmd('nnoremap <M-j> :m .+1<cr>==')
 vim.cmd('nnoremap <M-k> :m .-2<cr>==')
 
 
--- what does this do again?
-lvim.builtin.terminal.execs = { }
 
+vim.g.symbols_outline = {
+  auto_preview = false,
+  show_relative_numbers = true,
+  keymaps = {
+    goto_location = "<Tab>",
+  },
+}
+
+
+
+lvim.builtin.terminal.execs = {{}}
 lvim.builtin.dashboard.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.lualine.active = true
-lvim.builtin.lualine.options.theme = "gruvbox"
-lvim.builtin.bufferline.active = true
+lvim.builtin.lualine.options.theme = "gruvbox-flat"
 
 -- remaps and misc settings
-local cmp = require('cmp')
-lvim.builtin.cmp.mapping['<Tab>'] = cmp.mapping.confirm({ select = true })
-lvim.builtin.cmp.mapping['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-lvim.builtin.cmp.mapping['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-
+require('user.cmp');
 require('user.which-key');
 require('user.telescope');
 require('user.treesitter');

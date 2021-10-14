@@ -1,5 +1,5 @@
 local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '<C-p>',  [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts) -- ripgrep string
+vim.api.nvim_set_keymap('n', 'rg',  [[<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>]], opts) -- ripgrep string
 
 
 
