@@ -1,5 +1,8 @@
 vim.g.symbols_outline = {
   auto_preview = false,
-  goto_location = "<Tab>",
+  show_relative_numbers = true,
+  keymaps = {
+    goto_location = '<Tab>',
+  }
 }
 

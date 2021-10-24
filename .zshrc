@@ -138,11 +138,13 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#
 
-export PATH="/Users/jiangthang/.local/bin/lvim:$PATH"
 export PATH=/opt/homebrew/bin:$PATH
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
+export PATH="/Users/jiangthang/.local/bin/lvim:$PATH"
+export PATH="/Users/jiangthang/flutter/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
@@ -151,14 +153,15 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 
+
 eval "$(starship init zsh)"
 
 
 
-function set_win_title(){
-  echo -ne "\033]0; $(basename "$PWD") \007"
-}
-precmd_functions+=(set_win_title)
+# function set_win_title(){
+#   echo -ne "\033]0; $(basename "$PWD") \007"
+# }
+# precmd_functions+=(set_win_title)
 
 
 
