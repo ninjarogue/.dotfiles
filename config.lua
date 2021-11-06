@@ -5,7 +5,9 @@ lvim.transparent_window = 'true'
 lvim.lsp.diagnostics.virtual_text = false
 -- debugger
 lvim.builtin.dap.active = false
-lvim.colorscheme = 'tokyonight'
+vim.g.gruvbox_dark_sidebar = true
+lvim.colorscheme = 'gruvbox-flat'
+lvim.builtin.lualine.options.theme = 'gruvbox-flat'
 
 -- set options
 vim.opt.mouse = 'a'
@@ -16,6 +18,7 @@ vim.opt.splitbelow = true
 vim.opt.wildignore = '*/node_modules/**'
 vim.opt.joinspaces = false
 vim.opt.undofile = true
+vim.opt.linespace = 3
 
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -29,7 +32,6 @@ vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in m
 vim.opt.spell = false
 vim.opt.wrap = false
 vim.opt.completeopt = { 'menuone', 'noselect' }
-vim.opt.clipboard = 'unnamedplus'
 vim.opt.confirm = true
 vim.opt.backup = false -- creates a backup file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -44,7 +46,6 @@ vim.opt.fileencoding = 'utf-8' -- the encoding written to a file
 
 
 
-lvim.builtin.lualine.options.theme = 'tokyonight'
 lvim.builtin.terminal.execs = {{}}
 lvim.builtin.dashboard.active = true
 
@@ -62,6 +63,7 @@ require('user.treesitter');
 require('user.nvimtree');
 require('user.symbols-outline');
 require('user.better-escape');
+require('user.lsp-signature');
 
 -- Formatters and Linters
 lvim.lang.javascript.linters = { { exe = 'eslint_d' } }

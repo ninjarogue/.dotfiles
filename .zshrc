@@ -72,13 +72,12 @@ export ZSH="/Users/jiangthang/.oh-my-zsh"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-
-# auto-start tmux when terminal opens
 ZSH_AUTOSUGGEST_USE_ASYNC="true"
+VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
-source /opt/homebrew/share/antigen/antigen.zsh
+# source /opt/homebrew/share/antigen/antigen.zsh
 
-antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
+# antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -91,20 +90,18 @@ antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
 
 
 
-VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
 
-
-antigen bundle zsh-users/zsh-autosuggestions
 
 # Tell Antigen that you're done.
-antigen apply
+# antigen apply
 
 
 
 plugins=(
   git
   web-search
+  zsh-autosuggestions
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -145,30 +142,26 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/Users/jiangthang/.local/bin/lvim:$PATH"
 export PATH="/Users/jiangthang/flutter/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
+source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
 
 eval "$(starship init zsh)"
 
 
 
-# function set_win_title(){
-#   echo -ne "\033]0; $(basename "$PWD") \007"
-# }
-# precmd_functions+=(set_win_title)
-
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-
+  # auto-start tmux when terminal opens
 if [ -z "$TMUX" ]
 then
   tmux attach -t base || tmux new -s base

@@ -12,12 +12,12 @@ lvim.plugins = {
 
   { 'tpope/vim-surround' },
 
-  -- {
-  --   'ray-x/lsp_signature.nvim',
-  --   config = function()
-  --     require('user.lsp-signature').config()
-  --   end,
-  -- },
+  {
+    'ray-x/lsp_signature.nvim',
+    config = function()
+      require('user.lsp-signature').config()
+    end,
+  },
 
   {
     'folke/lsp-colors.nvim',
@@ -33,10 +33,7 @@ lvim.plugins = {
 
   {
     'windwp/nvim-ts-autotag',
-    event='BufReadPre',
-    config = function()
-      require('nvim-ts-autotag').setup()
-    end
+    event='BufReadPre'
   },
 
   { 'lukas-reineke/indent-blankline.nvim',
