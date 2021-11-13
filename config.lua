@@ -69,6 +69,7 @@ require('user.lsp-signature');
 lvim.lang.javascript.linters = { { exe = 'eslint_d' } }
 lvim.lang.typescript.linters = { { exe = 'eslint_d' } }
 lvim.lang.typescriptreact.linters = { { exe = 'eslint_d' } }
+lvim.lang.javascriptreact.linters = { { exe = 'eslint_d' } }
 lvim.lang.lua.linters = { { exe = 'luacheck' } }
 lvim.format_on_save = false
 

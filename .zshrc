@@ -102,6 +102,8 @@ plugins=(
   git
   web-search
   zsh-autosuggestions
+  zsh-interactive-cd
+  tmux
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -149,7 +151,6 @@ export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
 
 eval "$(starship init zsh)"
@@ -158,7 +159,6 @@ eval "$(starship init zsh)"
 
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
   # auto-start tmux when terminal opens
@@ -167,3 +167,14 @@ then
   tmux attach -t base || tmux new -s base
 fi
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fe() {
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
+}
+
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
