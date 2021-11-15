@@ -160,7 +160,6 @@ eval "$(starship init zsh)"
 
 
 
-
   # auto-start tmux when terminal opens
 if [ -z "$TMUX" ]
 then

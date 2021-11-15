@@ -183,11 +183,11 @@ packer.startup(function()
     run = 'make'
   }
 
-  use { 'p00f/nvim-ts-rainbow' }
+  use 'p00f/nvim-ts-rainbow'
 
-  use { 'tpope/vim-surround' }
+  use 'tpope/vim-surround'
 
-  use { 'mfussenegger/nvim-dap' }
+  use 'mfussenegger/nvim-dap'
 end)
 
 
