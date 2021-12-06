@@ -57,6 +57,8 @@ require('user.mappings');
 require('user.plugins');
 -- remaps and misc settings
 require('user.cmp');
+
+-- lvim.builtin.which_key.mappings = nil
 require('user.which-key');
 require('user.telescope');
 require('user.treesitter');

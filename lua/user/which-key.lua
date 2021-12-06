@@ -4,6 +4,7 @@ lvim.builtin.which_key.setup['triggers_blacklist'] = {
   n = { 'w', 'c', 'j' }
 }
 
+
 lvim.builtin.which_key.mappings['='] = 'which_key_ignore'
 lvim.builtin.which_key.mappings['j'] = 'which_key_ignore'
 lvim.builtin.which_key.mappings['?'] = { '<cmd>Cheatsheet<CR>', 'Cheatsheet' }

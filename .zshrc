@@ -104,6 +104,7 @@ plugins=(
   zsh-autosuggestions
   zsh-interactive-cd
   tmux
+  dirhistory
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -144,6 +145,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/Users/jiangthang/.local/bin/lvim:$PATH"
 export PATH="/Users/jiangthang/flutter/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+export PATH="/opt/homebrew/bin/graphql-lsp:$PATH"
 export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
@@ -153,9 +155,10 @@ source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
+
+
+
 eval "$(starship init zsh)"
-
-
 
 
 
@@ -167,12 +170,98 @@ then
 fi
 
 
+
+
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# search and edit file with neovim
 fe() {
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# Another fd - cd into the selected directory
+# This one differs from the above, by only showing the sub directories and not
+#  showing the directories within those.
+#fd() {
+#  DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
+#    && cd "$DIR"
+#}
+
+# fda - including hidden directories
+fda() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+# fdr - cd to selected parent directory
+fdr() {
+  local declare dirs=()
+  get_parent_dirs() {
+    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
+    if [[ "${1}" == '/' ]]; then
+      for _dir in "${dirs[@]}"; do echo $_dir; done
+    else
+      get_parent_dirs $(dirname "$1")
+    fi
+  }
+  local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf-tmux --tac)
+  cd "$DIR"
+}
+# cdf - cd into the directory of the selected file
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+#!/bin/bash
+# alternative using ripgrep-all (rga) combined with fzf-tmux preview
+# This requires ripgrep-all (rga) installed: https://github.com/phiresky/ripgrep-all
+# This implementation below makes use of "open" on macOS, which can be replaced by other commands if needed.
+# allows to search in PDFs, E-Books, Office documents, zip, tar.gz, etc. (see https://github.com/phiresky/ripgrep-all)
+# find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
+fif() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+    local file
+    file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$*" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$*"' {}")" && echo "opening $file" && nvim "$file" || return 1;
+}
+
+#!/bin/bash
+
+##
+# Interactive search.
+# Usage: `ff` or `ff <folder>`.
+#
+ff() {
+    [[ -n $1 ]] && cd $1 # go to provided folder or noop
+    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+
+    selected=$(
+    FZF_DEFAULT_COMMAND="rg --files" fzf \
+      -m \
+      -e \
+      --ansi \
+      --disabled \
+      --reverse \
+      --bind "ctrl-a:select-all" \
+      --bind "f12:execute-silent:(subl -b {})" \
+      --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+      --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
+    )
+
+    [[ -n $selected ]] && nvim $selected # open multiple files in editor
+}
+
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
