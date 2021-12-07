@@ -20,7 +20,7 @@ local set = vim.opt
 set.relativenumber = true
 set.joinspaces = false
 set.timeoutlen = 500
-set.completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
+set.completeopt = 'menu,menuone,noselect' -- Set completeopt to have a better completion experience
 set.inccommand = 'nosplit' --Incremental live completion (note: this is now a default on master)
 set.showmode = false
 set.hlsearch = true --Set highlight on search
@@ -156,6 +156,8 @@ packer.startup(function()
   use 'mfussenegger/nvim-dap'
 
   use 'puremourning/vimspector'
+
+  use 'onsails/lspkind-nvim'
 
   -- UI to select things (files, grep results, open buffers...)
   use {
