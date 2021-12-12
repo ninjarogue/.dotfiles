@@ -184,17 +184,17 @@ fe() {
 fd() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
+                  -o -maxdepth 1 -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
 # Another fd - cd into the selected directory
 # This one differs from the above, by only showing the sub directories and not
 #  showing the directories within those.
-#fd() {
-#  DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
-#    && cd "$DIR"
-#}
+# fd() {
+#   DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
+#     && cd "$DIR"
+# }
 
 # fda - including hidden directories
 fda() {
@@ -235,33 +235,27 @@ fif() {
     file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$*" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$*"' {}")" && echo "opening $file" && nvim "$file" || return 1;
 }
 
-#!/bin/bash
+# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
 
-##
-# Interactive search.
-# Usage: `ff` or `ff <folder>`.
-#
-ff() {
-    [[ -n $1 ]] && cd $1 # go to provided folder or noop
-    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
-
-    selected=$(
-    FZF_DEFAULT_COMMAND="rg --files" fzf \
-      -m \
-      -e \
-      --ansi \
-      --disabled \
-      --reverse \
-      --bind "ctrl-a:select-all" \
-      --bind "f12:execute-silent:(subl -b {})" \
-      --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
-      --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
-    )
-
-    [[ -n $selected ]] && nvim $selected # open multiple files in editor
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-2}
+    fi
 }
 
-
+# INITIAL_QUERY=""
+# RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+# FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+#   fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+#       --ansi --disabled --query "$INITIAL_QUERY" \
+#       --height=50% --layout=reverse
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
