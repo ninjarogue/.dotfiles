@@ -5,7 +5,7 @@ require('options')
 require('mappings')
 
 -- load colorscheme after configuration
--- vim.cmd [[colorscheme gruvbox-flat]]
+vim.cmd [[colorscheme gruvbox-flat]]
 
 
 
