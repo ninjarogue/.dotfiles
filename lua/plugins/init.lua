@@ -47,7 +47,12 @@ packer.startup(function()
   use 'itchyny/lightline.vim' -- Fancier statusline
 
   -- Add indentation guides even on blank lines
-  use 'lukas-reineke/indent-blankline.nvim'
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require('plugins.indentline').config()
+    end
+  }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use {
@@ -63,7 +68,7 @@ packer.startup(function()
   use {
     'neovim/nvim-lspconfig', -- Collection of configurations for built-in LSP client
     config = function()
-      require('plugins.lsp').config()
+      require('plugins.lsp-config').config()
     end
   }
 
@@ -107,7 +112,6 @@ packer.startup(function()
 
   use 'onsails/lspkind-nvim'
 
-  -- UI to select things (files, grep results, open buffers...)
   use {
     'nvim-telescope/telescope.nvim',
     config = function()
