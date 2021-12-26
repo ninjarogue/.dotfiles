@@ -10,9 +10,6 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':w<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':q<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>wq', ':wq<CR>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', 'J', 'mzyyp`z', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'K', 'mzyyP`z', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('n', '<M-j>', ':m .+1<cr>==', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<M-k>', ':m .-2<cr>==', { noremap = true, silent = true })
 
@@ -27,14 +24,14 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('x', '<A-j>', ":move '>+1<CR>gv-gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('x', '<A-k>', ":move '<-2<CR>gv-gv", { noremap = true, silent = true })
+vim.cmd[[nnoremap <A-j> :move .+1<CR>==]]
+vim.cmd[[nnoremap <A-k> :move .-2<CR>==]]
+vim.cmd[[inoremap <silent> <A-j> <Esc>:move .+1<CR>==gi]]
+vim.cmd[[inoremap <silent> <A-k> <Esc>:move .-2<CR>==gi]]
+vim.cmd[[xnoremap <silent> <A-j> :move '>+1<CR>gv-gv]]
+vim.cmd[[xnoremap <silent> <A-k> :move '<-2<CR>gv-gv]]
 
 vim.api.nvim_set_keymap('n', '<leader>j', 'mzJ`z', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'Y', 'yg_', { noremap = true, silent = true })
@@ -61,16 +58,6 @@ vim.api.nvim_set_keymap('n', '<leader>Y', '"+yg_', { noremap = true, silent = tr
 -- Paste from clipboard
 vim.api.nvim_set_keymap('n', '<leader>P', '"+p', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>P', '"+p', { noremap = true, silent = true })
---
--- this doesn't ever work
-vim.api.nvim_set_keymap('n', '<leader>wo', ':BufferLineCloseLeft<CR> :BufferLineCloseRight<CR>', { noremap = true, silent = true })
-
-vim.cmd [[ nnoremap <silent> H :BufferLineCyclePrev<CR>]]
-vim.cmd [[ nnoremap <silent> L :BufferLineCycleNext<CR>]]
-vim.cmd [[ nnoremap <silent> <leader>] :BufferLineMoveNext<CR>]]
-vim.cmd [[ nnoremap <silent> <leader>[ :BufferLineMovePrev<CR>]]
-vim.cmd [[ nnoremap <silent> <leader>wh :BufferLineCloseLeft<CR>]]
-vim.cmd [[ nnoremap <silent> <leader>wl :BufferLineCloseRight<CR>]]
 
 vim.cmd [[nnoremap oo mzo<Esc>`z]]
 vim.cmd [[nnoremap OO mzO<Esc>`z]]
@@ -82,6 +69,8 @@ vim.cmd [[nnoremap <Down> :resize -5<CR>]]
 
 vim.cmd [[nnoremap <C-s> :source $MYVIMRC<CR>]]
 
+vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
+vim.cmd[[nnoremap J mzyyp`z]]
 -- Trouble Toggle custom mappings
 vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>Trouble<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>', { noremap = true, silent = true })
@@ -118,3 +107,6 @@ vim.cmd [[nmap <leader>dh <Plug>VimspectorStepOut]]
 vim.cmd [[nmap <leader>dl <Plug>VimspectorStepInto]]
 vim.cmd [[nmap <leader>dj <Plug>VimspectorStepOver]]
 
+vim.api.nvim_set_keymap('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })

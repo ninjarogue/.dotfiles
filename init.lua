@@ -1,14 +1,3 @@
-
-require('plugins')
-require('globals')
-require('options')
-require('mappings')
-
--- load colorscheme after configuration
-vim.cmd [[colorscheme gruvbox-flat]]
-
-
-
 vim.api.nvim_exec(
   [[
     augroup Random
@@ -21,4 +10,12 @@ vim.api.nvim_exec(
 
   false
 )
+
+require('plugins')
+require('globals')
+require('options')
+require('mappings')
+
+-- load colorscheme after configuration
+vim.cmd [[colorscheme gruvbox-flat]]
 

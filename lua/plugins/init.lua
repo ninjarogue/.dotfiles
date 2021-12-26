@@ -35,6 +35,8 @@ packer.startup(function()
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
+  -- use 'folke/todo-comments.nvim'
+
   use {
     'EdenEast/nightfox.nvim',
     -- config = function()
@@ -43,8 +45,17 @@ packer.startup(function()
   }
 
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
-
   use 'itchyny/lightline.vim' -- Fancier statusline
+
+  use 'sheerun/vim-polyglot'
+
+  use 'nvim-telescope/telescope-file-browser.nvim'
+
+  use {
+    'filipdutescu/renamer.nvim',
+    branch = 'master',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   -- Add indentation guides even on blank lines
   use {
@@ -74,6 +85,8 @@ packer.startup(function()
 
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
+  use 'L3MON4D3/LuaSnip'
+
   use {
     'hrsh7th/nvim-cmp',
     config = function()
@@ -84,19 +97,18 @@ packer.startup(function()
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-tabnine',
-      'hrsh7th/cmp-luasnip',
+      'L3MON4D3/LuaSnip'
     }
   } -- Autocompletion plugin
 
   use 'hrsh7th/cmp-nvim-lsp'
 
-  -- use 'saadparwaiz1/cmp_luasnip'
-
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
-
   use 'ggandor/lightspeed.nvim'
 
-  use 'windwp/nvim-ts-autotag'
+  use {
+    'windwp/nvim-ts-autotag',
+    after = 'nvim-treesitter'
+  }
 
   use 'kyazdani42/nvim-web-devicons'
 
@@ -165,14 +177,6 @@ packer.startup(function()
     config = function()
       require('trouble').setup()
     end,
-  }
-
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('bufferline').setup()
-    end
   }
 
   use {

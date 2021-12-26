@@ -25,6 +25,7 @@ set.smartcase = true
 set.updatetime = 250 --Decrease update time
 set.shiftwidth = 2
 set.tabstop = 2
+set.softtabstop = 2
 set.expandtab = true
 set.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 set.fileencoding = 'utf-8' -- the encoding written to a file
