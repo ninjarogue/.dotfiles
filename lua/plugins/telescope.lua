@@ -12,6 +12,45 @@ M.config = function()
 
   telescope.setup {
     defaults = {
+      prompt_prefix = "  ",
+      selection_caret = [[🦑]],
+      border = {},
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+      file_ignore_patterns = { 'node_modules' },
+      vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+      },
+      shorten_path = true,
+      sorting_strategy = "ascending",
+      layout_config = {
+        prompt_position = "top",
+        width = 0.9,
+        horizontal = {
+          -- width_padding = 0.1,
+          -- height_padding = 0.1,
+          -- preview_cutoff = 60,
+          -- width = width_for_nopreview,
+          preview_width = horizontal_preview_width
+        },
+        vertical = {
+          -- width_padding = 0.05,
+          -- height_padding = 1,
+          width = 0.75,
+          height = 0.85,
+          preview_height = 0.4,
+          mirror = true
+        },
+        flex = {
+          -- change to horizontal after 120 cols
+          flip_columns = 120
+        }
+      },
       mappings = {
         i = {
           ['<C-u>'] = false,
@@ -20,11 +59,18 @@ M.config = function()
           ['<C-k>'] = actions.move_selection_previous,
           ['<Tab>'] = actions.file_edit,
           ['<C-x>'] = actions.add_selection,
-          ["<C-d>"] = actions.delete_buffer,
+          ['<C-d>'] = actions.delete_buffer,
+          ["<PageUp>"] = actions.results_scrolling_up,
+          ["<PageDown>"] = actions.results_scrolling_down,
         },
 
         n = {
-          ["<C-d>"] = actions.delete_buffer,
+          ['<C-d>'] = actions.delete_buffer,
+          ["H"] = actions.move_to_top,
+          ["M"] = actions.move_to_middle,
+          ["L"] = actions.move_to_bottom,
+          ["<PageUp>"] = actions.results_scrolling_up,
+          ["<PageDown>"] = actions.results_scrolling_down,
         }
       },
 
@@ -39,6 +85,7 @@ M.config = function()
       },
 
       extensions = {
+        find_cmd = 'rg',
         fzf = {
           fuzzy = true,                    -- false will only do exact matching
           override_generic_sorter = true,  -- override the generic sorter
@@ -50,7 +97,8 @@ M.config = function()
         file_browser = {
           mappings = {
             ['n'] = {
-              ['<C-h>'] = fb_actions.toggle_hidden
+              ['<C-h>'] = fb_actions.toggle_hidden,
+              ['<C-m>'] = fb_actions.move_file
             },
 
             ['i'] = {
