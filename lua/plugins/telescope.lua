@@ -8,6 +8,7 @@ M.config = function()
   end
 
   local actions = require 'telescope.actions'
+  local action_layout = require 'telescope.actions.layout'
   local fb_actions = require 'telescope'.extensions.file_browser.actions
 
   telescope.setup {
@@ -53,24 +54,26 @@ M.config = function()
       },
       mappings = {
         i = {
-          ['<C-u>'] = false,
-          ['<C-d>'] = false,
           ['<C-j>'] = actions.move_selection_next,
           ['<C-k>'] = actions.move_selection_previous,
           ['<Tab>'] = actions.file_edit,
           ['<C-x>'] = actions.add_selection,
+          ['<C-n>'] = actions.remove_selection,
           ['<C-d>'] = actions.delete_buffer,
+          ['<C-p>'] = action_layout.toggle_preview,
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
         },
 
         n = {
           ['<C-d>'] = actions.delete_buffer,
+          ['<C-n>'] = actions.remove_selection,
           ["H"] = actions.move_to_top,
           ["M"] = actions.move_to_middle,
           ["L"] = actions.move_to_bottom,
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
+          ['<C-p>'] = action_layout.toggle_preview,
         }
       },
 

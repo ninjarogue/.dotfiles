@@ -24,6 +24,10 @@ vim.api.nvim_exec(
 local packer = require 'packer'
 local use = require('packer').use
 
+local function config_fn(name)
+  return require(string.format('plugins.%s', name))
+end
+
 packer.startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 
@@ -36,6 +40,10 @@ packer.startup(function()
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- use 'folke/todo-comments.nvim'
+  use {
+    'nacro90/numb.nvim',
+    config = config_fn 'numb'
+  }
 
   use {
     'EdenEast/nightfox.nvim',
@@ -60,9 +68,7 @@ packer.startup(function()
   -- Add indentation guides even on blank lines
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-      require('plugins.indentline').config()
-    end
+    config = config_fn 'indentline'
   }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -113,6 +119,8 @@ packer.startup(function()
   use 'kyazdani42/nvim-web-devicons'
 
   use 'eddyekofo94/gruvbox-flat.nvim'
+
+  use 'folke/tokyonight.nvim'
 
   use 'p00f/nvim-ts-rainbow'
 

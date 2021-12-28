@@ -15,7 +15,8 @@ vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 vim.g.lightline = {
-  colorscheme = 'gruvbox-flat',
+  -- colorscheme = 'gruvbox-flat',
+  colorscheme = 'tokyonight',
 
   active = {
     left = {
@@ -34,10 +35,10 @@ vim.g.lightline = {
 
 
 
- vim.g.gruvbox_flat_style = 'dark'
- vim.g.gruvbox_dark_sidebar = true
- vim.g.gruvbox_sidebars = { "qf", "terminal", "packer" }
- vim.g.gruvbox_colors = {
-   fg = "#D4D298",
- }
+ -- vim.g.gruvbox_flat_style = 'dark'
+ -- vim.g.gruvbox_dark_sidebar = true
+ -- vim.g.gruvbox_sidebars = { "qf", "terminal", "packer" }
+ -- vim.g.gruvbox_colors = {
+ --   fg = "#D4D298",
+ -- }
 

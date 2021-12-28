@@ -1,13 +1,9 @@
-local M = {}
-
-M.config = function()
+return function()
   local status_ok, indent_blankline = pcall(require, "indent_blankline")
 
   if not status_ok then
     return
   end
-
-  local set = vim.opt
 
   vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
   vim.g.indent_blankline_filetype_exclude = {
@@ -45,6 +41,7 @@ M.config = function()
     "import_statement",
     "operation_type",
   }
+
   indent_blankline.setup({
     show_end_of_line = true,
     space_char_blankline = " ",
@@ -52,6 +49,4 @@ M.config = function()
     show_current_context_start = true,
   })
 end
-
-return M
 
