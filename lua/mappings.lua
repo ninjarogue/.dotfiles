@@ -72,7 +72,6 @@ vim.cmd [[nnoremap <C-s> :source $MYVIMRC<CR>]]
 vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
 vim.cmd[[nnoremap J mzyyp`z]]
 -- Trouble Toggle custom mappings
-vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>Trouble<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tq', '<cmd>TroubleToggle quickfix<CR>', { noremap = true, silent = true })
@@ -110,3 +109,7 @@ vim.cmd [[nmap <leader>dj <Plug>VimspectorStepOver]]
 vim.api.nvim_set_keymap('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
+
+
+--- Todo comments
+vim.api.nvim_set_keymap('n', '<leader>tf', ':TodoQuickFix<CR>', { noremap = true, silent = true })

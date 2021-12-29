@@ -39,7 +39,11 @@ packer.startup(function()
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
-  -- use 'folke/todo-comments.nvim'
+  use {
+    'folke/todo-comments.nvim',
+    config = config_fn 'todo-comments'
+  }
+
   use {
     'nacro90/numb.nvim',
     config = config_fn 'numb'

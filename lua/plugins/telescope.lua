@@ -52,6 +52,7 @@ M.config = function()
           flip_columns = 120
         }
       },
+
       mappings = {
         i = {
           ['<C-j>'] = actions.move_selection_next,
