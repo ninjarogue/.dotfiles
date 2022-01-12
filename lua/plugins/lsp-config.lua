@@ -10,6 +10,9 @@ M.config = function()
 
 
   local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
     local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -47,7 +50,19 @@ M.config = function()
     }
   }
 
+  vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false
+  })
 
+  local signs = {Error = " ", Warn = " ", Hint = " ", Info = " "}
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+  end
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = 'single',
@@ -86,6 +101,7 @@ M.config = function()
 
   nvim_lsp.tsserver.setup {
     capabilities = capabilities,
+    single_file_support = true,
     on_attach = function(client, bufnr)
       -- disable tsserver formatting if you plan on formatting via null-ls
       client.resolved_capabilities.document_formatting = false
@@ -143,7 +159,9 @@ M.config = function()
 
       -- no default maps, so you may want to define some here
       on_attach(bufnr)
-    end
+    end,
+
+    flags = {debounce_text_changes = 150}
   }
 
 

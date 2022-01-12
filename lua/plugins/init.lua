@@ -70,10 +70,10 @@ packer.startup(function()
   }
 
   -- Add indentation guides even on blank lines
-  use {
-    'lukas-reineke/indent-blankline.nvim',
-    config = config_fn 'indentline'
-  }
+  -- use {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   config = config_fn 'indentline'
+  -- }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use {
@@ -122,9 +122,11 @@ packer.startup(function()
 
   use 'kyazdani42/nvim-web-devicons'
 
-  use 'eddyekofo94/gruvbox-flat.nvim'
-
   use 'folke/tokyonight.nvim'
+
+  use 'navarasu/onedark.nvim'
+
+  use 'eddyekofo94/gruvbox-flat.nvim'
 
   use 'p00f/nvim-ts-rainbow'
 

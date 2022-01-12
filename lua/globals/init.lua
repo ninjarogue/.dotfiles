@@ -1,3 +1,17 @@
+-- autocommands
+vim.api.nvim_exec(
+  [[
+    augroup Random
+      autocmd!
+      autocmd BufWritePre * %s/\s\+$//e
+      autocmd InsertEnter * :normal zz
+      autocmd TextYankPost * silent! lua vim.highlight.on_yank() -- Hightlight on yank
+    augroup end
+  ]],
+
+  false
+)
+
 -- Hide lsp diagnostics virtual text
 vim.diagnostic.config({virtual_text = false})
 
@@ -32,13 +46,4 @@ vim.g.lightline = {
 
   component_function = { gitbranch = 'fugitive#head' },
 }
-
-
-
- -- vim.g.gruvbox_flat_style = 'dark'
- -- vim.g.gruvbox_dark_sidebar = true
- -- vim.g.gruvbox_sidebars = { "qf", "terminal", "packer" }
- -- vim.g.gruvbox_colors = {
- --   fg = "#D4D298",
- -- }
 
