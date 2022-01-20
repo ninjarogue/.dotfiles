@@ -13,6 +13,9 @@ M.config = function()
 
   telescope.setup {
     defaults = {
+      cache_picker = {
+        num_pickers = 3
+      },
       prompt_prefix = "   ",
       color_devicons = true,
       selection_caret = [[🦑]],
@@ -63,7 +66,7 @@ M.config = function()
         n = {
           ['<C-d>'] = actions.delete_buffer,
           ['<C-n>'] = actions.remove_selection,
-          ["H"] = actions.move_to_top,
+          ['H'] = actions.move_to_top,
           ["M"] = actions.move_to_middle,
           ["L"] = actions.move_to_bottom,
           ["<PageUp>"] = actions.results_scrolling_up,
@@ -142,13 +145,14 @@ M.config = function()
   vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fw', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({previewer = false})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>sr', ':Telescope resume<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles({hidden = true})<CR>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>sr', [[<cmd>lua require('telescope.builtin').oldfiles({hidden = true})<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<space>fb', [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>]], {noremap = true})
+  vim.api.nvim_set_keymap('n', '<space>fb', [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser({cwd = require('telescope.utils').buffer_dir()})<CR>]], {noremap = true})
   vim.api.nvim_set_keymap('n', '<leader>pr', ':Telescope projects<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>gs', ':Telescope git_status<CR>', { noremap = true, silent = true })
 end

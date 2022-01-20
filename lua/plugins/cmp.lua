@@ -9,6 +9,7 @@ M.config = function()
 
   local luasnip = require 'luasnip'
   local lspkind = require 'lspkind'
+  lspkind.init()
 
   cmp.setup {
     snippet = {
@@ -24,20 +25,24 @@ M.config = function()
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
-      ['<Tab>'] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
+      ['<C-y>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Insert,
         select = true,
       },
+      -- ['<Tab>'] = cmp.mapping.confirm {
+      --   behavior = cmp.ConfirmBehavior.Replace,
+      --   select = true,
+      -- },
 
-     ['<S-Tab>'] = function(fallback)
-       if cmp.visible() then
-         cmp.select_prev_item()
-       elseif luasnip.jumpable(-1) then
-         luasnip.jump(-1)
-       else
-         fallback()
-       end
-     end,
+     -- ['<S-Tab>'] = function(fallback)
+      --  if cmp.visible() then
+      --    cmp.select_prev_item()
+      --  elseif luasnip.jumpable(-1) then
+      --    luasnip.jump(-1)
+      --  else
+      --    fallback()
+      --  end
+     -- end,
     },
 
     sources = {
@@ -62,13 +67,13 @@ M.config = function()
       format = lspkind.cmp_format {
         with_text = true,
         menu = {
-          nvim_lsp = "ﲳ",
-          nvim_lua = "",
-          path = "ﱮ",
-          buffer = "﬘",
+          nvim_lsp = '[LSP]',
+          nvim_lua = '[api]',
+          path = '[path]',
+          buffer = '[buf]',
+          gh_issues = '[issues]',
           treesitter = "",
-          -- zsh = "",
-          -- spell = "暈"
+          tn = '[TabNine]'
         }
       }
     },

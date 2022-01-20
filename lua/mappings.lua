@@ -10,8 +10,8 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':w<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':q<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>wq', ':wq<CR>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<M-j>', ':m .+1<cr>==', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-k>', ':m .-2<cr>==', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<M-j>', ':m .+1<cr>==', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<M-k>', ':m .-2<cr>==', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '$', 'g_', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '0', '_', { noremap = true, silent = true })
@@ -113,3 +113,8 @@ vim.api.nvim_set_keymap('v', '<leader>rn', '<cmd>lua require("renamer").rename()
 
 --- Todo comments
 vim.api.nvim_set_keymap('n', '<leader>tf', ':TodoQuickFix<CR>', { noremap = true, silent = true })
+
+-- Glow
+vim.api.nvim_set_keymap('n', '<leader>go', ':Glow<CR>', { noremap = true, silent = true })
+vim.cmd [[nnoremap <C-w>z <C-w>\|<C-w>_]]
+

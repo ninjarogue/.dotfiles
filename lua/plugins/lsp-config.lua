@@ -72,7 +72,6 @@ M.config = function()
     border = 'single',
   })
 
-
   -- Enable the following language servers
   nvim_lsp.dartls.setup{
     on_attach = on_attach,
@@ -81,7 +80,6 @@ M.config = function()
 
   nvim_lsp.graphql.setup{
     cmd = { "graphql-lsp", "server", "-m", "stream" },
-    on_attach = on_attach,
     capabilities = capabilities,
   }
 
@@ -93,7 +91,6 @@ M.config = function()
         end
       }
     },
-    on_attach = on_attach,
     capabilities = capabilities,
   }
 
