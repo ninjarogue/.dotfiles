@@ -41,3 +41,24 @@ fif() {
   rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
+fcb() {
+  result=$(git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --height 50% --border --ansi --tac --preview-window right:70% \
+      --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
+    sed 's/^..//' | cut -d' ' -f1)
+
+  if [[ $result != "" ]]; then
+    if [[ $result == remotes/* ]]; then
+      git checkout --track $(echo $result | sed 's#remotes/##')
+    else
+      git checkout "$result"
+    fi
+  fi
+}
+
+fgs() {
+  git -c color.status=always status --short |
+  fzf --height 50% --border --ansi --multi --ansi --nth 2..,.. \
+    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
+  cut -c4- | sed 's/.* -> //'
+}
