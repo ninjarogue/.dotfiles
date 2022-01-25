@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+return function()
   local status_ok, glow_hover = pcall(require, 'glow-hover')
 
   if not status_ok then
@@ -15,6 +13,4 @@ M.config = function()
     glow_path = 'glow'
   })
 end
-
-return M
 
