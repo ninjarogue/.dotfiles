@@ -24,9 +24,11 @@ vim.api.nvim_exec(
 local packer = require 'packer'
 local use = require('packer').use
 
-local function config_fn(name)
+local function fn_config(name)
   return require(string.format('plugins.%s', name))
 end
+
+
 
 packer.startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
@@ -39,7 +41,18 @@ packer.startup(function()
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
-  use "lukas-reineke/cmp-rg"
+  use 'lukas-reineke/cmp-rg'
+
+  use 'sainnhe/everforest'
+
+  use {
+    'navarasu/onedark.nvim',
+    config = function()
+      require('onedark').setup {
+        style = 'darker'
+      }
+    end
+  }
 
   use {
     'blackCauldron7/surround.nvim',
@@ -48,24 +61,17 @@ packer.startup(function()
 
   use {
     'JASONews/glow-hover',
-    config = config_fn 'glow-hover'
+    config = fn_config 'glow-hover'
   }
 
   use {
     'folke/todo-comments.nvim',
-    config = config_fn 'todo-comments'
+    config = fn_config 'todo-comments'
   }
 
   use {
     'nacro90/numb.nvim',
-    config = config_fn 'numb'
-  }
-
-  use {
-    'EdenEast/nightfox.nvim',
-    -- config = function()
-    --   require('themes.nightfox').config()
-    -- end
+    config = fn_config 'numb'
   }
 
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
@@ -84,7 +90,7 @@ packer.startup(function()
   -- Add indentation guides even on blank lines
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = config_fn 'indentline'
+    config = fn_config 'indentline'
   }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
