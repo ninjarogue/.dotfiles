@@ -94,8 +94,8 @@ VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
 
 export FZF_BASE=/opt/homebrew/opt/fzf
-DISABLE_FZF_KEY_BINDINGS="false"
-DISABLE_FZF_AUTO_COMPLETION="false"
+ENABLE_FZF_KEY_BINDINGS="true"
+ENABLE_FZF_AUTO_COMPLETION="false"
 
 plugins=(
   git
