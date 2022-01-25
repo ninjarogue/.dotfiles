@@ -93,10 +93,9 @@ VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
 
 
-# Tell Antigen that you're done.
-# antigen apply
-
-
+export FZF_BASE=/opt/homebrew/opt/fzf
+DISABLE_FZF_KEY_BINDINGS="false"
+DISABLE_FZF_AUTO_COMPLETION="false"
 
 plugins=(
   git
@@ -105,7 +104,9 @@ plugins=(
   zsh-interactive-cd
   tmux
   dirhistory
+  fzf
 )
+
 source $ZSH/oh-my-zsh.sh
 
 
@@ -138,7 +139,8 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#
+
+
 
 export PATH=/opt/homebrew/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
@@ -150,19 +152,12 @@ export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 
-
-
-eval "$(starship init zsh)"
-
-
-
-  # auto-start tmux when terminal opens
+#auto-start tmux when terminal opens
 if [ -z "$TMUX" ]
 then
   tmux attach -t base || tmux new -s base
@@ -170,92 +165,13 @@ fi
 
 
 
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.config/fzf-scripts.zsh
 
-# search and edit file with neovim
-fe() {
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
-}
 
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -maxdepth 1 -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
 
-# Another fd - cd into the selected directory
-# This one differs from the above, by only showing the sub directories and not
-#  showing the directories within those.
-# fd() {
-#   DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
-#     && cd "$DIR"
-# }
-
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-# fdr - cd to selected parent directory
-fdr() {
-  local declare dirs=()
-  get_parent_dirs() {
-    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
-    if [[ "${1}" == '/' ]]; then
-      for _dir in "${dirs[@]}"; do echo $_dir; done
-    else
-      get_parent_dirs $(dirname "$1")
-    fi
-  }
-  local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf-tmux --tac)
-  cd "$DIR"
-}
-# cdf - cd into the directory of the selected file
-cdf() {
-   local file
-   local dir
-   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
-}
-
-#!/bin/bash
-# alternative using ripgrep-all (rga) combined with fzf-tmux preview
-# This requires ripgrep-all (rga) installed: https://github.com/phiresky/ripgrep-all
-# This implementation below makes use of "open" on macOS, which can be replaced by other commands if needed.
-# allows to search in PDFs, E-Books, Office documents, zip, tar.gz, etc. (see https://github.com/phiresky/ripgrep-all)
-# find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
-fif() {
-    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    local file
-    file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$*" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$*"' {}")" && echo "opening $file" && nvim "$file" || return 1;
-}
-
-# fkill - kill processes - list only the ones you can kill. Modified the earlier script.
-fkill() {
-    local pid
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-    fi
-
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-2}
-    fi
-}
-
-# INITIAL_QUERY=""
-# RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-# FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-#   fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-#       --ansi --disabled --query "$INITIAL_QUERY" \
-#       --height=50% --layout=reverse
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+
+
+eval "$(starship init zsh)"
