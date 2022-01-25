@@ -13,8 +13,6 @@ vim.api.nvim_exec(
 )
 
 -- Hide lsp diagnostics virtual text
-vim.diagnostic.config({virtual_text = false})
-
 vim.nvim_tui_enable_true_color = true
 
 vim.g.mapleader = ' '
