@@ -42,6 +42,18 @@ packer.startup(function()
   use "lukas-reineke/cmp-rg"
 
   use {
+    'blackCauldron7/surround.nvim',
+    config = function()
+      require('surround').setup { mappings_style = 'sandwich' }
+    end
+  }
+
+  use {
+    'JASONews/glow-hover',
+    config = config_fn 'glow-hover'
+  }
+
+  use {
     'folke/todo-comments.nvim',
     config = config_fn 'todo-comments'
   }
