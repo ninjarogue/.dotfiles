@@ -46,17 +46,18 @@ M.config = function()
     },
 
     sources = {
-       { name = 'nvim_lsp' },
-       {
-         name = 'buffer',
-         keyword_length = 5,
-         get_bufnrs = function()
-           local bufs = {}
-           for _, win in ipairs(vim.api.nvim_list_wins()) do
-             bufs[vim.api.nvim_win_get_buf(win)] = true
-           end
-           return vim.tbl_keys(bufs)
+      { name = 'rg' },
+      { name = 'nvim_lsp' },
+      {
+        name = 'buffer',
+        keyword_length = 5,
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
           end
+          return vim.tbl_keys(bufs)
+        end
        },
        { name = 'cmp_tabnine' },
        { name = 'path' },

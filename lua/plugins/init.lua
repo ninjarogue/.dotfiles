@@ -39,6 +39,8 @@ packer.startup(function()
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
+  use "lukas-reineke/cmp-rg"
+
   use {
     'folke/todo-comments.nvim',
     config = config_fn 'todo-comments'
@@ -150,7 +152,7 @@ packer.startup(function()
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('plugins.gitsigns').config()
+      require('gitsigns').setup()
     end,
     requires = { 'nvim-lua/plenary.nvim' }
   }
