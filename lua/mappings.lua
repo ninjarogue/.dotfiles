@@ -118,3 +118,6 @@ vim.api.nvim_set_keymap('n', '<leader>tf', ':TodoQuickFix<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<leader>go', ':Glow<CR>', { noremap = true, silent = true })
 vim.cmd [[nnoremap <C-w>z <C-w>\|<C-w>_]]
 
+-- soft text-wrapping
+vim.cmd [[nnoremap <C-w>, :set wrap linebreak nolist<CR>]]
+vim.cmd [[nnoremap <C-w>. :set nowrap<CR>]]
