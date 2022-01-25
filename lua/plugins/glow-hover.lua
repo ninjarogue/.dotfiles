@@ -7,10 +7,10 @@ return function()
 
   glow_hover.setup({
     -- The followings are the default values
-    max_width = 50,
-    padding = 10,
-    border = 'shadow',
-    glow_path = 'glow'
+    max_width = 120,
+    padding = 1,
+    border = 'rounded',
+    glow_path = 'glow',
   })
 end
 
