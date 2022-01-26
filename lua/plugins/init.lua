@@ -43,25 +43,21 @@ packer.startup(function()
 
   use 'lukas-reineke/cmp-rg'
 
-  use 'sainnhe/everforest'
-
-  use {
-    'navarasu/onedark.nvim',
-    config = function()
-      require('onedark').setup {
-        style = 'darker'
-      }
-    end
-  }
+  --themes
+  -- use 'sainnhe/everforest'
+  use 'rmehri01/onenord.nvim'
+  -- use {
+  --   'navarasu/onedark.nvim',
+  --   config = function()
+  --     require('onedark').setup {
+  --       style = 'darker'
+  --     }
+  --   end
+  -- }
 
   use {
     'blackCauldron7/surround.nvim',
-    config = config_fn 'surround'
-  }
-
-  use {
-    'JASONews/glow-hover',
-    config = fn_config 'glow-hover'
+    config = fn_config 'surround'
   }
 
   use {
@@ -74,8 +70,10 @@ packer.startup(function()
     config = fn_config 'numb'
   }
 
-  -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
-  use 'itchyny/lightline.vim' -- Fancier statusline
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   use 'sheerun/vim-polyglot'
 
@@ -115,6 +113,7 @@ packer.startup(function()
 
   use 'L3MON4D3/LuaSnip'
 
+  -- Autocompletion plugin
   use {
     'hrsh7th/nvim-cmp',
     config = function()
@@ -127,7 +126,7 @@ packer.startup(function()
       'hrsh7th/cmp-tabnine',
       'L3MON4D3/LuaSnip'
     }
-  } -- Autocompletion plugin
+  }
 
   use 'hrsh7th/cmp-nvim-lsp'
 
@@ -142,13 +141,9 @@ packer.startup(function()
 
   use 'folke/tokyonight.nvim'
 
-  use 'navarasu/onedark.nvim'
-
   use 'eddyekofo94/gruvbox-flat.nvim'
 
   use 'p00f/nvim-ts-rainbow'
-
-  use 'tpope/vim-surround'
 
   use 'mfussenegger/nvim-dap'
 
@@ -183,6 +178,12 @@ packer.startup(function()
   use 'hrsh7th/cmp-path'
 
   use {
+    'jdhao/better-escape.vim',
+    event = 'InsertEnter',
+    config = fn_config 'better-escape'
+  }
+
+  use {
     'tzachar/cmp-tabnine',
     run='./install.sh',
     requires = 'hrsh7th/nvim-cmp'
@@ -209,13 +210,6 @@ packer.startup(function()
     config = function()
       require('trouble').setup()
     end,
-  }
-
-  use {
-    'max397574/better-escape.nvim',
-    config = function()
-      require('plugins.better-escape').config()
-    end
   }
 
   use {

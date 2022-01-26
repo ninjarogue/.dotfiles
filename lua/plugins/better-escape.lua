@@ -1,16 +1,5 @@
-local M = {}
-
-M.config = function()
-  local status_ok, better_escape = pcall(require, 'better-escape')
-
-  if not status_ok then
-    return
-  end
-
-  better_escape.setup {
-    mapping = { 'kj', 'jj', 'kk' }
-  }
+return function()
+  vim.g.better_escape_loaded = true
+  vim.g.better_escape_shortcut = { 'kj', 'jj', 'kk' }
 end
-
-return M
 
