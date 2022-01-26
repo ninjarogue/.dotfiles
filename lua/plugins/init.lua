@@ -147,8 +147,6 @@ packer.startup(function()
 
   use 'mfussenegger/nvim-dap'
 
-  use 'puremourning/vimspector'
-
   use 'onsails/lspkind-nvim'
 
   use {

@@ -94,15 +94,15 @@ vim.api.nvim_set_keymap('v', '<leader>/', ':Commentary<CR>', { noremap = true, s
 
 -- this remap is overwriting the vim fugitive remap for resolving merge conflicts
 -- vim.cmd [[nnoremap <leader>dd :call vimspector#Launch()<CR>]]
-vim.cmd [[nnoremap <leader>de :call vimspector#Reset()<CR>]]
-vim.cmd [[nnoremap <leader>dc :call vimspector#Continue()<CR>]]
-vim.cmd [[nnoremap <leader>dt :call vimspector#ToggleBreakpoint()<CR>]]
-vim.cmd [[nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>]]
+-- vim.cmd [[nnoremap <leader>de :call vimspector#Reset()<CR>]]
+-- vim.cmd [[nnoremap <leader>dc :call vimspector#Continue()<CR>]]
+-- vim.cmd [[nnoremap <leader>dt :call vimspector#ToggleBreakpoint()<CR>]]
+-- vim.cmd [[nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>]]
 
-vim.cmd [[nmap <leader>dk <Plug>VimspectorRestart]]
-vim.cmd [[nmap <leader>dh <Plug>VimspectorStepOut]]
-vim.cmd [[nmap <leader>dl <Plug>VimspectorStepInto]]
-vim.cmd [[nmap <leader>dj <Plug>VimspectorStepOver]]
+-- vim.cmd [[nmap <leader>dk <Plug>VimspectorRestart]]
+-- vim.cmd [[nmap <leader>dh <Plug>VimspectorStepOut]]
+-- vim.cmd [[nmap <leader>dl <Plug>VimspectorStepInto]]
+-- vim.cmd [[nmap <leader>dj <Plug>VimspectorStepOver]]
 
 vim.api.nvim_set_keymap('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
