@@ -94,8 +94,8 @@ VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
 
 export FZF_BASE=/opt/homebrew/opt/fzf
-ENABLE_FZF_KEY_BINDINGS="true"
-ENABLE_FZF_AUTO_COMPLETION="false"
+DISABLE_FZF_KEY_BINDINGS="false"
+DISABLE_FZF_AUTO_COMPLETION="false"
 
 plugins=(
   git
@@ -105,6 +105,7 @@ plugins=(
   tmux
   dirhistory
   fzf
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -152,7 +153,6 @@ export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
