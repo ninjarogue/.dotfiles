@@ -67,8 +67,6 @@ vim.cmd [[nnoremap <Right> :vertical resize -5<CR>]]
 vim.cmd [[nnoremap <Up> :resize +5<CR>]]
 vim.cmd [[nnoremap <Down> :resize -5<CR>]]
 
-vim.cmd [[nnoremap <C-s> :source $MYVIMRC<CR>]]
-
 vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
 vim.cmd[[nnoremap J mzyyp`z]]
 -- Trouble Toggle custom mappings
