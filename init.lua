@@ -7,5 +7,5 @@ require('mappings')
 
 
 --load colorscheme after configuration
-vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme onenord')
 

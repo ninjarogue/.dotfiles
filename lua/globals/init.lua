@@ -26,22 +26,7 @@ vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
-vim.g.lightline = {
-  -- colorscheme = 'gruvbox-flat',
-  colorscheme = 'tokyonight',
-
-  active = {
-    left = {
-      { 'mode', 'paste' },
-      {
-        'gitbranch',
-        'readonly',
-        'filename',
-        'modified'
-      }
-    }
-  },
-
-  component_function = { gitbranch = 'fugitive#head' },
+vim.g.lualine = {
+  options = { theme = 'onenord' },
 }
 
