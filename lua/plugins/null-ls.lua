@@ -15,9 +15,6 @@ M.config = function()
       builtins.diagnostics.eslint_d,
       builtins.code_actions.eslint_d,
       builtins.formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-
-      builtins.formatting.black.with({ extra_args = { "--fast" } }),
-      builtins.formatting.stylua,
     }
   })
 end
