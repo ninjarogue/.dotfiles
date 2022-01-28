@@ -122,16 +122,6 @@ M.config = function()
 
       file_browser = {
         theme = 'ivy',
-        mappings = {
-          ['n'] = {
-            ['<C-h>'] = fb_actions.toggle_hidden,
-            -- ['<C-m>'] = fb_actions.move_file
-          },
-
-          ['i'] = {
-            ['<C-h>'] = fb_actions.toggle_hidden
-          }
-        }
       }
     },
   }

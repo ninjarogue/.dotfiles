@@ -89,10 +89,6 @@ VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 # Add wisely, as too many plugins slow down shell startup.
 
 
-
-
-
-
 export FZF_BASE=/opt/homebrew/opt/fzf
 DISABLE_FZF_KEY_BINDINGS="false"
 DISABLE_FZF_AUTO_COMPLETION="false"
@@ -151,6 +147,9 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/bin/graphql-lsp:$PATH"
 export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
 
+
+
+
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -163,15 +162,10 @@ then
   tmux attach -t base || tmux new -s base
 fi
 
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source ~/.config/fzf-scripts.zsh
 
-
-
 export PATH="$PATH:$HOME/.rvm/bin"
-
-
 
 eval "$(starship init zsh)"
