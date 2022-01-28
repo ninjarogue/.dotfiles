@@ -14,7 +14,6 @@ M.config = function()
     sources = {
       builtins.diagnostics.eslint_d,
       builtins.code_actions.eslint_d,
-      builtins.formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
     }
   })
 end
