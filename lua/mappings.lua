@@ -71,7 +71,7 @@ vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
 vim.cmd[[nnoremap J mzyyp`z]]
 -- Trouble Toggle custom mappings
 vim.api.nvim_set_keymap('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>TroubleToggle document_diagnostics<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tq', '<cmd>TroubleToggle quickfix<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>TroubleToggle loclist<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gR', '<cmd>TroubleToggle lsp_references<CR>', { noremap = true, silent = true })

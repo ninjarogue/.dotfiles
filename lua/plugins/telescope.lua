@@ -37,7 +37,7 @@ M.config = function()
       layout_strategy = 'horizontal',
       layout_config = {
         horizontal = {
-          prompt_position = "top",
+          prompt_position = 'top',
           preview_width = 0.55,
           results_width = 0.8,
         },
@@ -58,8 +58,8 @@ M.config = function()
           ['<C-x>'] = actions.toggle_selection,
           ['<C-d>'] = actions.delete_buffer,
           ['<C-p>'] = action_layout.toggle_preview,
-          ["<PageUp>"] = actions.results_scrolling_up,
-          ["<PageDown>"] = actions.results_scrolling_down,
+          ['<PageUp>'] = actions.results_scrolling_up,
+          ['<PageDown>'] = actions.results_scrolling_down,
           ['<C-l>'] = action_layout.cycle_layout_next,
         },
 
@@ -67,18 +67,18 @@ M.config = function()
           ['<C-d>'] = actions.delete_buffer,
           ['<C-n>'] = actions.remove_selection,
           ['H'] = actions.move_to_top,
-          ["M"] = actions.move_to_middle,
-          ["L"] = actions.move_to_bottom,
-          ["<PageUp>"] = actions.results_scrolling_up,
-          ["<PageDown>"] = actions.results_scrolling_down,
+          ['M'] = actions.move_to_middle,
+          ['L'] = actions.move_to_bottom,
+          ['<PageUp>'] = actions.results_scrolling_up,
+          ['<PageDown>'] = actions.results_scrolling_down,
           ['<C-p>'] = action_layout.toggle_preview,
           ['<C-l>'] = action_layout.cycle_layout_next,
         }
       },
 
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new
+      file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new
     },
 
     pickers = {
@@ -116,7 +116,7 @@ M.config = function()
         fuzzy = true,                    -- false will only do exact matching
         override_generic_sorter = true,  -- override the generic sorter
         override_file_sorter = true,     -- override the file sorter
-        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        case_mode = 'smart_case',        -- or "ignore_case" or "respect_case"
                                          -- the default case_mode is "smart_case"
       },
 
@@ -127,7 +127,7 @@ M.config = function()
   }
 
   require('telescope').load_extension('fzf')
-  require("telescope").load_extension('file_browser')
+  require('telescope').load_extension('file_browser')
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({previewer = false})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>f', ':Telescope find_files hidden=true previewer=false <CR>', { noremap = true, silent = true })
