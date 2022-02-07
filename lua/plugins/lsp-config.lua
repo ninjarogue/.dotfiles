@@ -32,6 +32,7 @@ M.config = function()
   end
 
 
+
     -- nvim-cmp supports additional completion capabilities
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -59,27 +60,38 @@ M.config = function()
   })
 
   local signs = {Error = " ", Warn = " ", Hint = " ", Info = " "}
+
+  local border = {
+      {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"}
+  }
+
+  local handlers =  {
+    ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+    ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+  }
+
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
   end
 
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'single',
-  })
-
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'single',
-  })
-
   -- Enable the following language servers
-  nvim_lsp.dartls.setup{
+  nvim_lsp.dartls.setup {
     on_attach = on_attach,
+    handlers = handlers,
     capabilities = capabilities,
   }
 
-  nvim_lsp.graphql.setup{
+  nvim_lsp.graphql.setup {
     cmd = { "graphql-lsp", "server", "-m", "stream" },
+    handlers = handlers,
     capabilities = capabilities,
   }
 
@@ -91,14 +103,22 @@ M.config = function()
         end
       }
     },
+    handlers = handlers,
     capabilities = capabilities,
   }
 
+  nvim_lsp.rust_analyzer.setup {
+    on_attach = on_attach,
+    handlers = handlers,
+    capabilities = capabilities,
+  }
 
+  -- require('rust-tools').setup({})
 
   nvim_lsp.tsserver.setup {
     capabilities = capabilities,
     single_file_support = true,
+    handlers = handlers,
     on_attach = function(client, bufnr)
       -- disable tsserver formatting if you plan on formatting via null-ls
       client.resolved_capabilities.document_formatting = false
@@ -162,6 +182,7 @@ M.config = function()
   }
 
 
+
   -- sumneko lua ls
   USER = vim.fn.expand('$USER')
 
@@ -213,6 +234,7 @@ M.config = function()
        },
      },
     },
+    handlers = handlers,
     flags = {
      debounce_text_changes = 150,
     },

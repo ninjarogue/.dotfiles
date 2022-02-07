@@ -43,6 +43,8 @@ packer.startup(function()
 
   use 'lukas-reineke/cmp-rg'
 
+  -- use 'simrat39/rust-tools.nvim'
+
   --themes
   -- use 'sainnhe/everforest'
   use 'rmehri01/onenord.nvim'
@@ -72,6 +74,7 @@ packer.startup(function()
 
   use {
     'nvim-lualine/lualine.nvim',
+    config = fn_config 'lualine',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
@@ -81,6 +84,9 @@ packer.startup(function()
 
   use {
     'filipdutescu/renamer.nvim',
+    config = function()
+      require('renamer').setup({})
+    end,
     branch = 'master',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
@@ -204,7 +210,7 @@ packer.startup(function()
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('trouble').setup()
+      require('trouble').setup({})
     end,
   }
 

@@ -8,7 +8,6 @@ set.inccommand = 'nosplit' --Incremental live completion (note: this is now a de
 set.showmode = false
 set.hlsearch = true --Set highlight on search
 set.swapfile = false
-vim.wo.number = true --Make line numbers default
 set.autoindent = true
 set.smartindent = true -- make indenting smarter again
 set.wildignore = '*/node_modules/**'
@@ -30,5 +29,8 @@ set.expandtab = true
 set.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 set.fileencoding = 'utf-8' -- the encoding written to a file
 vim.wo.signcolumn = 'yes'
+vim.wo.number = true --Make line numbers default
 set.termguicolors = true --Set colorscheme (order is important here)
+set.clipboard = 'unnamedplus'
+set.cursorline = true --This might cause neovim to respond slowly especially for large files or files with long lines
 
