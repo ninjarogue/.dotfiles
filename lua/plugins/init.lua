@@ -46,16 +46,13 @@ packer.startup(function()
   -- use 'simrat39/rust-tools.nvim'
 
   --themes
-  -- use 'sainnhe/everforest'
+  use 'sainnhe/everforest'
   use 'rmehri01/onenord.nvim'
-  -- use {
-  --   'navarasu/onedark.nvim',
-  --   config = function()
-  --     require('onedark').setup {
-  --       style = 'darker'
-  --     }
-  --   end
-  -- }
+
+  use {
+    'EdenEast/nightfox.nvim',
+    config = fn_config 'nightfox'
+  }
 
   use {
     'blackCauldron7/surround.nvim',
@@ -144,8 +141,6 @@ packer.startup(function()
   }
 
   use 'kyazdani42/nvim-web-devicons'
-
-  use 'folke/tokyonight.nvim'
 
   use 'eddyekofo94/gruvbox-flat.nvim'
 
