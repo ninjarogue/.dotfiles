@@ -36,7 +36,7 @@ vim.cmd[[xnoremap <silent> <A-k> :move '<-2<CR>gv-gv]]
 vim.api.nvim_set_keymap('n', '<leader>j', 'mzJ`z', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'Y', 'yg_', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'U', '<C-r>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>p', '"_dP', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>p', '"_dP', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-n>', ':nohl<CR>', { noremap = true, silent = true })
@@ -119,3 +119,7 @@ vim.cmd [[nnoremap <C-w>z <C-w>\|<C-w>_]]
 -- soft text-wrapping
 vim.cmd [[nnoremap <C-w>, :set wrap linebreak nolist<CR>]]
 vim.cmd [[nnoremap <C-w>. :set nowrap<CR>]]
+
+-- material colorscheme
+vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('material.functions').toggle_style()<CR>]], { noremap = true, silent = true })
+

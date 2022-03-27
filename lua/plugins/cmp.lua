@@ -34,6 +34,9 @@ M.config = function()
     sources = {
       { name = 'rg' },
       { name = 'nvim_lsp' },
+      { name = 'cmp_tabnine' },
+      { name = 'path' },
+      { name = 'luasnip' },
       {
         name = 'buffer',
         keyword_length = 5,
@@ -45,9 +48,6 @@ M.config = function()
           return vim.tbl_keys(bufs)
         end
        },
-       { name = 'cmp_tabnine' },
-       { name = 'path' },
-       { name = 'luasnip' },
      },
 
     formatting = {

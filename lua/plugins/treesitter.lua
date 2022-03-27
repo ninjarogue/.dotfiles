@@ -127,10 +127,10 @@ M.config = function()
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>px'] = '@parameter.inner'
+        ['<leader>a'] = '@parameter.inner'
       },
       swap_previous = {
-        ['<leader>Px'] = '@parameter.inner'
+        ['<leader>A'] = '@parameter.inner'
       }
     },
 

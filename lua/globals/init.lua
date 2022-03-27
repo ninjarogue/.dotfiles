@@ -19,14 +19,17 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 
---Map blankline
+-- Map blankline
 vim.g.indent_blankline_char = '┊'
 vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
-vim.g.lualine = {
-  options = { theme = 'onenord' },
+vim.g.nvim_tree_show_icons = {
+  folders = 0,
+  files = 0,
+  git = 0,
+  folder_arrows = 0,
 }
 
