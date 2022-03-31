@@ -6,6 +6,6 @@ require('mappings')
 
 
 
+vim.g.material_style = "palenight"
 --load colorscheme after configuration
-vim.cmd('colorscheme nightfox')
-
+vim.cmd('colorscheme material')

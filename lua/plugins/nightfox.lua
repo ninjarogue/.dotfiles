@@ -6,7 +6,7 @@ return function()
   end
 
   nightfox.setup {
-    fox = 'nordfox',
+    fox = 'nightfox',
     styles = {
       comments = 'italic', -- Style that is applied to comments: see `highlight-args` for options
       functions = 'NONE', -- Style that is applied to functions: see `highlight-args` for options

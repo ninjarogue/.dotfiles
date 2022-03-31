@@ -38,21 +38,60 @@ packer.startup(function()
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  use 'tpope/vim-repeat'
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   use 'lukas-reineke/cmp-rg'
 
-  -- use 'simrat39/rust-tools.nvim'
+  use {
+    'mizlan/iswap.nvim',
+    config = fn_config 'iswap',
+  }
+
+  use 'MunifTanjim/nui.nvim'
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim"
+      },
+      config = fn_config 'neo-tree',
+  }
 
   --themes
-  use 'sainnhe/everforest'
-  use 'rmehri01/onenord.nvim'
-
+  -- use 'sainnhe/everforest'
+  -- use 'rmehri01/onenord.nvim'
+  --
   use {
-    'EdenEast/nightfox.nvim',
-    config = fn_config 'nightfox'
+    'marko-cerovac/material.nvim',
+    config = function()
+      require('material').setup {
+        contrast = {
+          sidebars = true,
+          cursor_line = true,
+        },
+
+        italics = {
+          comments = true,
+          functions = true,
+        },
+
+        contrast_filetypes = {
+          "terminal",
+          "packer",
+          "qf",
+        }
+      }
+    end,
   }
+
+  -- use {
+  --   'EdenEast/nightfox.nvim',
+  --   config = fn_config 'nightfox'
+  -- }
 
   use {
     'blackCauldron7/surround.nvim',
@@ -131,7 +170,10 @@ packer.startup(function()
     }
   }
 
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lsp-document-symbol'
 
   use 'ggandor/lightspeed.nvim'
 
@@ -140,15 +182,19 @@ packer.startup(function()
     after = 'nvim-treesitter'
   }
 
-  use 'kyazdani42/nvim-web-devicons'
+  -- use 'kyazdani42/nvim-web-devicons'
 
   use 'eddyekofo94/gruvbox-flat.nvim'
 
   use 'p00f/nvim-ts-rainbow'
 
-  use 'mfussenegger/nvim-dap'
-
   use 'onsails/lspkind-nvim'
+
+  use {
+    "SmiteshP/nvim-gps",
+    config = fn_config 'gps',
+    requires = "nvim-treesitter/nvim-treesitter",
+  }
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -170,10 +216,6 @@ packer.startup(function()
     run = 'make'
   }
 
-  use 'hrsh7th/cmp-buffer'
-
-  use 'hrsh7th/cmp-path'
-
   use {
     'jdhao/better-escape.vim',
     event = 'InsertEnter',
@@ -186,13 +228,13 @@ packer.startup(function()
     requires = 'hrsh7th/nvim-cmp'
   }
 
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('plugins.nvim-tree').config()
-    end
-  }
+  -- use {
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   config = function()
+  --     require('plugins.nvim-tree').config()
+  --   end
+  -- }
 
   use {
     'windwp/nvim-autopairs',
