@@ -15,7 +15,6 @@ set.hidden = true --Do not save when switching buffers (note: this is now a defa
 set.wrap = false
 set.splitright = true
 set.splitbelow = true
-set.cursorline = false
 set.mouse = 'a' --Enable mouse mode
 set.breakindent = true --Enable break indent
 set.undofile = true --Save undo history
@@ -32,5 +31,5 @@ vim.wo.signcolumn = 'yes'
 vim.wo.number = true --Make line numbers default
 set.termguicolors = true --Set colorscheme (order is important here)
 set.clipboard = 'unnamedplus'
-set.cursorline = true --This might cause neovim to respond slowly especially for large files or files with long lines
+set.cursorline = false --This might cause neovim to respond slowly especially for large files or files with long lines
 
