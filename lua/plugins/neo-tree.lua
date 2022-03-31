@@ -66,7 +66,7 @@ return function ()
       mappings = {
         ["<space>"] = "toggle_node",
         ["<2-LeftMouse>"] = "open",
-        ["<cr>"] = "open",
+        ["o"] = "open",
         ["S"] = "open_split",
         ["s"] = "open_vsplit",
         ["C"] = "close_node",

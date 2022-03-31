@@ -18,7 +18,7 @@ M.config = function()
       },
       prompt_prefix = "   ",
       color_devicons = true,
-      selection_caret = [[🍩]],
+      selection_caret = [[🍩 ]],
       border = {},
       borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       file_ignore_patterns = { 'node_modules', '.git' },
@@ -33,6 +33,8 @@ M.config = function()
       },
       shorten_path = true,
       use_less = true,
+      path_display = { shorten = 5 },
+      set_env = { ["COLORTERM"] = "truecolor" },
       sorting_strategy = 'ascending',
       layout_strategy = 'horizontal',
       layout_config = {
@@ -101,8 +103,9 @@ M.config = function()
       },
 
       find_files = {
+        -- find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
         theme = 'ivy',
-        disable_devicons = true,
+        disable_devicons = false,
         previewer = false,
         mappings = {
           ['n'] = {
@@ -112,18 +115,23 @@ M.config = function()
           ['i'] = {
             ['<C-h>'] = fb_actions.toggle_hidden
           }
-        }
+        },
       },
 
       oldfiles = {
-        disable_devicons = true,
+        disable_devicons = false,
         theme = 'ivy',
         previewer = false,
-      }
+      },
+
+      live_grep = {
+        theme = 'ivy',
+        only_sort_text = true,
+      },
     },
 
     extensions = {
-      find_cmd = 'rg',
+      find_cmd = 'fd',
       fzf = {
         fuzzy = true,                    -- false will only do exact matching
         override_generic_sorter = true,  -- override the generic sorter
@@ -138,12 +146,11 @@ M.config = function()
       }
     },
   }
-
   require('telescope').load_extension('fzf')
   require('telescope').load_extension('file_browser')
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({previewer = false})<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>f', ':Telescope find_files hidden=true previewer=false <CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], { noremap = true, silent = true })
