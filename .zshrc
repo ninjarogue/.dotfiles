@@ -75,10 +75,12 @@ export ZSH="/Users/jiangthang/.oh-my-zsh"
 ZSH_AUTOSUGGEST_USE_ASYNC="true"
 VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
-# source /opt/homebrew/share/antigen/antigen.zsh
+source /opt/homebrew/share/antigen/antigen.zsh
 
-# antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
-
+antigen use oh-my-zsh # Add Oh-My-ZSH as an API for plugins and theme
+antigen bundle 'wfxr/forgit'
+antigen bundle 'joshskidmore/zsh-fzf-history-search'
+antigen apply
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -87,11 +89,6 @@ VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-
-export FZF_BASE=/opt/homebrew/opt/fzf
-DISABLE_FZF_KEY_BINDINGS="false"
-DISABLE_FZF_AUTO_COMPLETION="false"
 
 plugins=(
   git
@@ -146,7 +143,11 @@ export PATH="/Users/jiangthang/flutter/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="/opt/homebrew/bin/graphql-lsp:$PATH"
 export PATH="$HOME/.config/nvim/lua-language-server/bin/macOS:$PATH"
+export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
 
+export FZF_BASE=/opt/homebrew/opt/fzf
+DISABLE_FZF_KEY_BINDINGS="false"
+DISABLE_FZF_AUTO_COMPLETION="false"
 
 
 
@@ -159,7 +160,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #auto-start tmux when terminal opens
 if [ -z "$TMUX" ]
 then
-  tmux attach -t base || tmux new -s base
+  tmux attach -t BASE || tmux new -s BASE
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
