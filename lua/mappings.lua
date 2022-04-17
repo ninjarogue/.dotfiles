@@ -156,4 +156,9 @@ vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('material.function
 -- telescope extensions
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require'telescope'.extensions.repo.list{file_ignore_patterns={'/%.local/', '/%.oh%-my%-zsh', '/%.config/', '/%.cargo/', '/%Library/'}}<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>cd', [[<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cd', [[:Telescope neoclip<CR>]], { noremap = true, silent = true })
+
+
+
+vim.api.nvim_set_keymap('n', '<leader>sw', [[:ISwap<CR>]], { noremap = true, silent = true })
 
