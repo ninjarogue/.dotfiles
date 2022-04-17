@@ -148,6 +148,7 @@ return function()
   require('telescope').load_extension('file_browser')
   require('telescope').load_extension('repo')
   require('telescope').load_extension('zoxide')
+  require('telescope').load_extension('neoclip')
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({previewer = false})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })

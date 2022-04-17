@@ -81,7 +81,6 @@ packer.startup(function()
   --   config = fn_config 'nightfox'
   -- }
 
-  use 'eddyekofo94/gruvbox-flat.nvim'
 
 
   -- git
@@ -139,6 +138,16 @@ packer.startup(function()
 
 
   -- the rest
+  use {
+    "AckslD/nvim-neoclip.lua",
+    requires = {
+      {'nvim-telescope/telescope.nvim'},
+    },
+    config = function()
+      require('neoclip').setup()
+    end,
+  }
+
   use {
     'nvim-treesitter/nvim-treesitter', -- Highlight, edit, and navigate code using a fast incremental parsing library
     config = function()
@@ -245,7 +254,6 @@ packer.startup(function()
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-repeat'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'p00f/nvim-ts-rainbow'
   use 'kyazdani42/nvim-web-devicons'
