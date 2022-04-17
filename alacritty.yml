@@ -10,18 +10,18 @@ window:
 
 font:
   normal:
-    family: UbuntuMono Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Regular
 
   bold:
-    family: UbuntuMono Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
 
   italic:
-    family: UbuntuMono Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
 
-  size: 19
+  size: 18
   # extra space around each character.
   # offset.y can be thought of as modifying the line spacing
   # offset.x can be thought of as modifying the letter spacing
@@ -136,46 +136,33 @@ key_bindings:
   - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } # Alt + |
 
 
+# iTerm2 Material Design - Palenight theme for Alacritty
+# Source : https://github.com/JonathanSpeek/palenight-iterm2
+
 colors:
+  # Default colors
   primary:
-    background: '#181E23'
-    foreground: '#D5D5D5'
+    background: '0x292d3e'
+    foreground: '0xd0d0d0'
 
-    dim_foreground: '#384149'
-    bright_foreground: '#FFFFFF'
-
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
-
-  search:
-    matches:
-      foreground: '#80D1FF'
-      background: '#181E23'
-    focused_match:
-      foreground: CellBackground
-      background: CellForeground
-
-  selection:
-    text: "#181E23"
-    background: "#D5D5D5"
-
+  # Normal colors
   normal:
-    black:   '#181E23'
-    red:     '#FF8080'
-    green:   '#97D59B'
-    yellow:  '#FFFE80'
-    blue:    '#80D1FF'
-    magenta: '#C780FF'
-    cyan:    '#80FFE4'
-    white:   '#D5D5D5'
+    black:   '0x292d3e'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xffcb6b'
+    blue:    '0x82aaff'
+    magenta: '0xc792ea'
+    cyan:    '0x89ddff'
+    white:   '0xd0d0d0'
 
+  # Bright colors
   bright:
-    black:   '#384149'
-    red:     '#FFAEAE'
-    green:   '#BEF8C1'
-    yellow:  '#FCFBA6'
-    blue:    '#ACE1FF'
-    magenta: '#D8A8FF'
-    cyan:    '#A2FFEB'
-    white:   '#FFFFFF'
+    black:   '0x434758'
+    red:     '0xff8b92'
+    green:   '0xddffa7'
+    yellow:  '0xffe585'
+    blue:    '0x9cc4ff'
+    magenta: '0xe1acff'
+    cyan:    '0xa3f7ff'
+    white:   '0xffffff'
