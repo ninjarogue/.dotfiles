@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+return function()
   local status_ok, telescope = pcall(require, 'telescope')
 
   if not status_ok then
@@ -31,9 +29,7 @@ M.config = function()
         '--column',
         '--smart-case',
       },
-      shorten_path = true,
       use_less = true,
-      path_display = { shorten = 5 },
       set_env = { ["COLORTERM"] = "truecolor" },
       sorting_strategy = 'ascending',
       layout_strategy = 'horizontal',
@@ -125,6 +121,8 @@ M.config = function()
       },
 
       live_grep = {
+        shorten_path = true,
+        path_display = { shorten = 5 },
         theme = 'ivy',
         only_sort_text = true,
       },
@@ -148,6 +146,8 @@ M.config = function()
   }
   require('telescope').load_extension('fzf')
   require('telescope').load_extension('file_browser')
+  require('telescope').load_extension('repo')
+  require('telescope').load_extension('zoxide')
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({previewer = false})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
@@ -155,7 +155,7 @@ M.config = function()
   vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fw', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({previewer = false})<CR>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({previewer = false})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], { noremap = true, silent = true })
@@ -166,6 +166,4 @@ M.config = function()
   vim.api.nvim_set_keymap('n', '<leader>pr', ':Telescope projects<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>gs', ':Telescope git_status<CR>', { noremap = true, silent = true })
 end
-
-return M
 

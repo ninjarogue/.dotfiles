@@ -31,5 +31,5 @@ vim.wo.signcolumn = 'yes'
 vim.wo.number = true --Make line numbers default
 set.termguicolors = true --Set colorscheme (order is important here)
 set.clipboard = 'unnamedplus'
-set.cursorline = false --This might cause neovim to respond slowly especially for large files or files with long lines
+set.cursorline = true --This might cause neovim to respond slowly especially for large files or files with long lines
 
