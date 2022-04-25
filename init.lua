@@ -6,6 +6,6 @@ require('mappings')
 
 
 
-vim.g.material_style = "palenight"
+vim.g.material_style = "deep ocean"
 --load colorscheme after configuration
 vim.cmd('colorscheme material')

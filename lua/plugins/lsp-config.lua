@@ -113,7 +113,16 @@ M.config = function()
     capabilities = capabilities,
   }
 
-  -- require('rust-tools').setup({})
+  local util = require('lspconfig/util')
+
+  nvim_lsp.gopls.setup {
+    on_attach = on_attach,
+    handlers = handlers,
+    capabilities = capabilities,
+    cmd = { 'gopls', 'serve' },
+    filetypes = { 'go', 'gomod' },
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  }
 
   nvim_lsp.tsserver.setup {
     capabilities = capabilities,
@@ -175,7 +184,7 @@ M.config = function()
       ts_utils.setup_client(client)
 
       -- no default maps, so you may want to define some here
-      on_attach(bufnr)
+      on_attach(client, bufnr)
     end,
 
     flags = {debounce_text_changes = 150}

@@ -24,7 +24,7 @@ vim.api.nvim_exec(
 local packer = require 'packer'
 local use = require('packer').use
 
-local function fn_config(name)
+local function get_fn_config(name)
   return require(string.format('plugins.%s', name))
 end
 
@@ -55,30 +55,12 @@ packer.startup(function()
   -- themes
   use {
     'marko-cerovac/material.nvim',
-    config = function()
-      require('material').setup {
-        contrast = {
-          sidebars = true,
-          cursor_line = true,
-        },
-
-        italics = {
-          comments = true,
-          functions = true,
-        },
-
-        contrast_filetypes = {
-          "terminal",
-          "packer",
-          "qf",
-        }
-      }
-    end,
+    config = get_fn_config 'material'
   }
 
   -- use {
   --   'EdenEast/nightfox.nvim',
-  --   config = fn_config 'nightfox'
+  --   config = get_fn_config 'nightfox'
   -- }
 
 
@@ -86,7 +68,7 @@ packer.startup(function()
   -- git
   use {
     'lewis6991/gitsigns.nvim', -- Add git related info in the signs columns and popups
-    config = fn_config 'gitsigns',
+    config = get_fn_config 'gitsigns',
     requires = { 'nvim-lua/plenary.nvim' }
   }
 
@@ -95,7 +77,7 @@ packer.startup(function()
   -- telescope
   use {
     'nvim-telescope/telescope.nvim',
-    config = fn_config 'telescope',
+    config = get_fn_config 'telescope',
     requires = 'nvim-lua/plenary.nvim'
   }
 
@@ -176,15 +158,13 @@ packer.startup(function()
 
   use {
     'windwp/nvim-autopairs',
-    config = function()
-      require('plugins.nvim-autopairs').config()
-    end
+    config = get_fn_config 'nvim-autopairs'
   }
 
   use {
     'jdhao/better-escape.vim',
     event = 'InsertEnter',
-    config = fn_config 'better-escape'
+    config = get_fn_config 'better-escape'
   }
 
   use {
@@ -194,17 +174,17 @@ packer.startup(function()
 
   use {
     'folke/todo-comments.nvim',
-    config = fn_config 'todo-comments'
+    config = get_fn_config 'todo-comments'
   }
 
   use {
     'nacro90/numb.nvim',
-    config = fn_config 'numb'
+    config = get_fn_config 'numb'
   }
 
   use {
     'nvim-lualine/lualine.nvim',
-    config = fn_config 'lualine',
+    config = get_fn_config 'lualine',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
@@ -220,22 +200,22 @@ packer.startup(function()
 
   use {
     'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
-    config = fn_config 'indentline'
+    config = get_fn_config 'indentline'
   }
 
   use {
     'blackCauldron7/surround.nvim',
-    config = fn_config 'surround'
+    config = get_fn_config 'surround'
   }
 
   use {
     'mizlan/iswap.nvim', -- swap parameters
-    config = fn_config 'iswap',
+    config = get_fn_config 'iswap',
   }
 
   use {
     "SmiteshP/nvim-gps",
-    config = fn_config 'gps',
+    config = get_fn_config 'gps',
     requires = "nvim-treesitter/nvim-treesitter",
   }
 
@@ -247,7 +227,7 @@ packer.startup(function()
         "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim"
       },
-      config = fn_config 'neo-tree',
+      config = get_fn_config 'neo-tree',
   }
   use 'MunifTanjim/nui.nvim'
   use 'sheerun/vim-polyglot'
@@ -259,5 +239,6 @@ packer.startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
   use 'ggandor/lightspeed.nvim'
+  use 'fatih/vim-go'
 end)
 
