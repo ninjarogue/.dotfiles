@@ -46,6 +46,11 @@ vim.cmd[[inoremap <silent> <A-j> <Esc>:move .+1<CR>==gi]]
 vim.cmd[[inoremap <silent> <A-k> <Esc>:move .-2<CR>==gi]]
 vim.cmd[[xnoremap <silent> <A-j> :move '>+1<CR>gv-gv]]
 vim.cmd[[xnoremap <silent> <A-k> :move '<-2<CR>gv-gv]]
+vim.cmd [[nnoremap oo mzo<Esc>`z]]
+vim.cmd [[nnoremap OO mzO<Esc>`z]]
+vim.cmd [[nnoremap <leader>nv :e ~/.config/nvim/init.lua<CR>]]
+vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
+vim.cmd[[nnoremap J mzyyp`z]]
 
 
 
@@ -81,15 +86,11 @@ vim.api.nvim_set_keymap('v', '<leader>P', '"+p', { noremap = true, silent = true
 
 
 
-vim.cmd [[nnoremap oo mzo<Esc>`z]]
-vim.cmd [[nnoremap OO mzO<Esc>`z]]
-vim.cmd [[nnoremap <leader>nv :e ~/.config/nvim/init.lua<CR>]]
-vim.cmd [[nnoremap <Left>  :vertical resize +5<CR>]]
-vim.cmd [[nnoremap <Right> :vertical resize -5<CR>]]
+--- Resizing split windows
+vim.cmd [[nnoremap <Left> :vertical resize -5<CR>]]
+vim.cmd [[nnoremap <Right>  :vertical resize +5<CR>]]
 vim.cmd [[nnoremap <Up> :resize +5<CR>]]
 vim.cmd [[nnoremap <Down> :resize -5<CR>]]
-vim.cmd[[xnoremap J :co '><CR>V'[=gv]]
-vim.cmd[[nnoremap J mzyyp`z]]
 
 
 
@@ -156,7 +157,7 @@ vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('material.function
 -- telescope extensions
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require'telescope'.extensions.repo.list{file_ignore_patterns={'/%.local/', '/%.oh%-my%-zsh', '/%.config/', '/%.cargo/', '/%Library/', '/%.vim/', '/%.antigen/'}}<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>cd', [[<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>cd', [[:Telescope neoclip<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>nc', [[:Telescope neoclip<CR>]], { noremap = true, silent = true })
 
 
 

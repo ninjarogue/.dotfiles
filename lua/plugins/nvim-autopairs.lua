@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+return function()
   local status_ok, nvim_autopairs = pcall(require, 'nvim-autopairs')
 
   if not status_ok then
@@ -11,6 +9,3 @@ M.config = function()
     disabled_filetype = { 'TelescopePrompt' }
   }
 end
-
-return M
-

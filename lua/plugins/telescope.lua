@@ -87,6 +87,8 @@ return function()
         ignore_current_buffer = true,
         theme = 'ivy',
         previewer = false,
+        shorten_path = true,
+        path_display = { shorten = 5 },
         mappings = {
           ['i'] = {
             ['<C-v>'] = actions.select_all,
