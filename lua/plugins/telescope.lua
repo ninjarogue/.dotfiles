@@ -166,7 +166,7 @@ return function()
   vim.api.nvim_set_keymap('n', '<leader>sr', ':Telescope resume<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles({hidden = true})<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<space>fb', [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser({cwd = require('telescope.utils').buffer_dir()})<CR>]], {noremap = true})
-  vim.api.nvim_set_keymap('n', '<leader>pr', ':Telescope projects<CR>', { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap('n', '<leader>pr', ':Telescope projects<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>gs', ':Telescope git_status<CR>', { noremap = true, silent = true })
 end
 

@@ -5,14 +5,10 @@ return function()
   end
 
   material.setup {
-    -- disable = {
-    --   background = true
-    -- },
-
-    -- high_visibility = {
-    --   darker = true,
-    --   deep_ocean = true
-    -- },
+    high_visibility = {
+      darker = true,
+      deep_ocean = true
+    },
 
     lualine_style = "default",
 
