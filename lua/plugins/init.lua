@@ -51,17 +51,11 @@ packer.startup(function()
   use 'L3MON4D3/LuaSnip'
 
 
-
   -- themes
   use {
-    'marko-cerovac/material.nvim',
-    config = get_fn_config 'material'
+    'EdenEast/nightfox.nvim',
+    config = get_fn_config 'nightfox'
   }
-
-  -- use {
-  --   'EdenEast/nightfox.nvim',
-  --   config = get_fn_config 'nightfox'
-  -- }
 
 
 

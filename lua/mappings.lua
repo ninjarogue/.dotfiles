@@ -149,11 +149,6 @@ vim.cmd [[nnoremap <C-w>. :set nowrap<CR>]]
 
 
 
--- material colorscheme
-vim.api.nvim_set_keymap('n', '<leader>mm', [[<cmd>lua require('material.functions').toggle_style()<CR>]], { noremap = true, silent = true })
-
-
-
 -- telescope extensions
 vim.api.nvim_set_keymap('n', '<leader>rl', [[<cmd>lua require'telescope'.extensions.repo.list{file_ignore_patterns={'/%.local/', '/%.oh%-my%-zsh', '/%.config/', '/%.cargo/', '/%Library/', '/%.vim/', '/%.antigen/'}}<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>cd', [[<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>]], { noremap = true, silent = true })

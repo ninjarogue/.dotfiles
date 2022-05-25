@@ -83,10 +83,30 @@ M.config = function()
   end
 
   -- Enable the following language servers
-  nvim_lsp.dartls.setup {
+  nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
     handlers = handlers,
     capabilities = capabilities,
+    settings = {
+      -- to enable rust-analyzer settings visit:
+      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+      ["rust-analyzer"] = {
+        -- enable clippy on save
+        checkOnSave = {
+            command = "clippy"
+        },
+        assist = {
+            importGranularity = "module",
+            importPrefix = "self",
+        },
+        cargo = {
+            loadOutDirsFromCheck = true
+        },
+        procMacro = {
+            enable = true
+        },
+      }
+    }
   }
 
   nvim_lsp.graphql.setup {

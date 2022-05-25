@@ -6,6 +6,5 @@ require('mappings')
 
 
 
-vim.g.material_style = "deep ocean"
 --load colorscheme after configuration
-vim.cmd('colorscheme material')
+vim.cmd('colorscheme nightfox')
