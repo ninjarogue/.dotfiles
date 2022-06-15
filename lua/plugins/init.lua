@@ -24,7 +24,7 @@ vim.api.nvim_exec(
 local packer = require 'packer'
 local use = require('packer').use
 
-local function get_fn_config(name)
+local function get_conf(name)
   return require(string.format('plugins.%s', name))
 end
 
@@ -54,7 +54,7 @@ packer.startup(function()
   -- themes
   use {
     'EdenEast/nightfox.nvim',
-    config = get_fn_config 'nightfox'
+    config = get_conf 'nightfox'
   }
 
 
@@ -62,7 +62,7 @@ packer.startup(function()
   -- git
   use {
     'lewis6991/gitsigns.nvim', -- Add git related info in the signs columns and popups
-    config = get_fn_config 'gitsigns',
+    config = get_conf 'gitsigns',
     requires = { 'nvim-lua/plenary.nvim' }
   }
 
@@ -71,7 +71,7 @@ packer.startup(function()
   -- telescope
   use {
     'nvim-telescope/telescope.nvim',
-    config = get_fn_config 'telescope',
+    config = get_conf 'telescope',
     requires = 'nvim-lua/plenary.nvim'
   }
 
@@ -152,13 +152,14 @@ packer.startup(function()
 
   use {
     'windwp/nvim-autopairs',
-    config = get_fn_config 'nvim-autopairs'
+    config = get_conf 'nvim-autopairs'
   }
 
   use {
     'jdhao/better-escape.vim',
+    opt = true,
     event = 'InsertEnter',
-    config = get_fn_config 'better-escape'
+    config = get_conf 'better-escape'
   }
 
   use {
@@ -168,17 +169,17 @@ packer.startup(function()
 
   use {
     'folke/todo-comments.nvim',
-    config = get_fn_config 'todo-comments'
+    config = get_conf 'todo-comments'
   }
 
   use {
     'nacro90/numb.nvim',
-    config = get_fn_config 'numb'
+    config = get_conf 'numb'
   }
 
   use {
     'nvim-lualine/lualine.nvim',
-    config = get_fn_config 'lualine',
+    config = get_conf 'lualine',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
@@ -194,22 +195,22 @@ packer.startup(function()
 
   use {
     'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
-    config = get_fn_config 'indentline'
+    config = get_conf 'indentline'
   }
 
   use {
     'blackCauldron7/surround.nvim',
-    config = get_fn_config 'surround'
+    config = get_conf 'surround'
   }
 
   use {
     'mizlan/iswap.nvim', -- swap parameters
-    config = get_fn_config 'iswap',
+    config = get_conf 'iswap',
   }
 
   use {
     "SmiteshP/nvim-gps",
-    config = get_fn_config 'gps',
+    config = get_conf 'gps',
     requires = "nvim-treesitter/nvim-treesitter",
   }
 
@@ -221,7 +222,7 @@ packer.startup(function()
         "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim"
       },
-      config = get_fn_config 'neo-tree',
+      config = get_conf 'neo-tree',
   }
   use 'MunifTanjim/nui.nvim'
   use 'sheerun/vim-polyglot'

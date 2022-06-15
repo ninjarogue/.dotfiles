@@ -8,18 +8,18 @@ window:
 
   dynamic_title: true
 
-font:
-  normal:
-    family: JetBrainsMono Nerd Font Mono
-    style: Regular
+# font:
+#   normal:
+#     family: JetBrainsMono Nerd Font Mono
+#     style: Regular
 
-  bold:
-    family: JetBrainsMono Nerd Font Mono
-    style: Bold
+#   bold:
+#     family: JetBrainsMono Nerd Font Mono
+#     style: Bold
 
-  italic:
-    family: JetBrainsMono Nerd Font Mono
-    style: Italic
+#   italic:
+#     family: JetBrainsMono Nerd Font Mono
+#     style: Italic
 
   size: 18
   # extra space around each character.
