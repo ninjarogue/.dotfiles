@@ -12,6 +12,7 @@ fzf
 gcc
 gitleaks
 gitui
+grex
 httpie
 imagemagick
 koekeishiya/formulae/skhd
