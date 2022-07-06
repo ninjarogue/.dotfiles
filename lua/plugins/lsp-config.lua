@@ -140,8 +140,11 @@ M.config = function()
     handlers = handlers,
     capabilities = capabilities,
     cmd = { 'gopls', 'serve' },
-    filetypes = { 'go', 'gomod' },
-    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    filetypes = { 'go', 'gomod', 'gotmpl' },
+    root_dir = function (fname)
+      return util.root_pattern 'go.work'(fname) or util.root_pattern('go.mod', '.git')(fname)
+    end,
+    single_file_support = true,
   }
 
   nvim_lsp.tsserver.setup {

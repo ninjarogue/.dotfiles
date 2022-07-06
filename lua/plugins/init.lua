@@ -234,6 +234,11 @@ packer.startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
   use 'ggandor/lightspeed.nvim'
-  use 'fatih/vim-go'
+  use {
+    'ray-x/go.nvim',
+    config = function()
+      require('go').setup()
+    end,
+  }
 end)
 

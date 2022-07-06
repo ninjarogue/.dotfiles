@@ -143,53 +143,47 @@ return function()
       file_browser = {
         theme = 'ivy',
         disable_devicons = true,
+      },
+
+      repo = {
+        list = {
+          fd_opts = {
+            "--no-ignore-vcs",
+          },
+          search_dirs = {
+            "~/my_projects",
+          },
+        },
       }
     },
   }
+
   require('telescope').load_extension('fzf')
   require('telescope').load_extension('file_browser')
   require('telescope').load_extension('repo')
   require('telescope').load_extension('zoxide')
   require('telescope').load_extension('neoclip')
+
   --Add leader shortcuts
   vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({previewer = false})<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>fw', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
-
-  vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
-
+  vim.api.nvim_set_keymap('n', '<leader>sg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>gr', [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>ca', [[<cmd>lua require('telescope.builtin').commands()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>km', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>sr', ':Telescope resume<CR>', { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles({hidden = true})<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<space>fb', [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser({cwd = require('telescope.utils').buffer_dir()})<CR>]], {noremap = true})
-
   vim.api.nvim_set_keymap('n', '<leader>dg', [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').git_stash()<CR>]], { noremap = true, silent = true })
-
   vim.api.nvim_set_keymap('n', '<leader>tr', [[<cmd>lua require('telescope.builtin').treesitter()<CR>]], { noremap = true, silent = true })
 end
 

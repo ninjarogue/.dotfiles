@@ -6,6 +6,7 @@ vim.api.nvim_exec(
       autocmd BufWritePre * %s/\s\+$//e
       autocmd InsertEnter * :normal zz
       autocmd TextYankPost * silent! lua vim.highlight.on_yank() -- Hightlight on yank
+      autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil,500)
     augroup end
   ]],
 
