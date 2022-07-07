@@ -33,8 +33,6 @@ end
 packer.startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 
-
-
   -- nvim-lsp
   use {
     'neovim/nvim-lspconfig', -- Collection of configurations for built-in LSP client
@@ -45,11 +43,8 @@ packer.startup(function()
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'nvim-treesitter/nvim-treesitter-textobjects'   -- Additional textobjects for treesitter
 
-
-
   -- snippets
   use 'L3MON4D3/LuaSnip'
-
 
   -- themes
   use {
@@ -57,16 +52,12 @@ packer.startup(function()
     config = get_conf 'nightfox'
   }
 
-
-
   -- git
   use {
     'lewis6991/gitsigns.nvim', -- Add git related info in the signs columns and popups
     config = get_conf 'gitsigns',
     requires = { 'nvim-lua/plenary.nvim' }
   }
-
-
 
   -- telescope
   use {
@@ -82,8 +73,6 @@ packer.startup(function()
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'cljoly/telescope-repo.nvim'
   use 'jvgrootveld/telescope-zoxide'
-
-
 
   -- cmp auto-completion
   use {
@@ -110,8 +99,6 @@ packer.startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-nvim-lsp-document-symbol'
   use 'lukas-reineke/cmp-rg'
-
-
 
   -- the rest
   use {
@@ -224,6 +211,23 @@ packer.startup(function()
       },
       config = get_conf 'neo-tree',
   }
+
+  use {
+  'phaazon/hop.nvim',
+  branch = 'v1', -- optional but strongly recommended
+  config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
+
+  use {
+    'ray-x/go.nvim',
+    config = function()
+      require('go').setup()
+    end,
+  }
+
   use 'MunifTanjim/nui.nvim'
   use 'sheerun/vim-polyglot'
   use 'tpope/vim-fugitive' -- Git commands in nvim
@@ -233,12 +237,6 @@ packer.startup(function()
   use 'p00f/nvim-ts-rainbow'
   use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
-  use 'ggandor/lightspeed.nvim'
-  use {
-    'ray-x/go.nvim',
-    config = function()
-      require('go').setup()
-    end,
-  }
+  -- use 'ggandor/lightspeed.nvim'
 end)
 
