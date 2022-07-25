@@ -18,15 +18,15 @@ M.config = function()
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-t>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   end
@@ -147,6 +147,18 @@ M.config = function()
     single_file_support = true,
   }
 
+  nvim_lsp.pyright.setup {
+    on_attach = on_attach,
+    handlers = handlers,
+    capabilities = capabilities,
+    root_dir = function(fname)
+      return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+    end,
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    single_file_support = true,
+  }
+
   nvim_lsp.tsserver.setup {
     capabilities = capabilities,
     single_file_support = true,
@@ -218,16 +230,10 @@ M.config = function()
   -- sumneko lua ls
   USER = vim.fn.expand('$USER')
 
-  local sumneko_root_path = ''
-  local sumneko_binary = ''
+  local sumneko_root_path = '/Users/' .. USER .. '/.config/nvim/lua-language-server'
+  local sumneko_binary = '/Users/' .. USER .. '/.config/nvim/lua-language-server/bin/macOS/lua-language-server'
 
-  if vim.fn.has('mac') == 1 then
-   sumneko_root_path = '/Users/' .. USER .. '/.config/nvim/lua-language-server'
-   sumneko_binary = '/Users/' .. USER .. '/.config/nvim/lua-language-server/bin/macOS/lua-language-server'
-  elseif vim.fn.has('unix') == 1 then
-   sumneko_root_path = '/home/' .. USER .. '/.config/nvim/lua-language-server'
-   sumneko_binary = '/home/' .. USER .. '/.config/nvim/lua-language-server/bin/Linux/lua-language-server'
-  else
+  if vim.fn.has('mac') ~= 1 or vim.fn.has('unix') ~= 1 then
    print('Unsupported system for sumneko')
   end
 

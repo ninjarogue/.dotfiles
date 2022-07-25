@@ -119,7 +119,7 @@ packer.startup(function()
   }
 
   use {
-    'folke/trouble.nvim',
+    'folke/lsp-trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('trouble').setup({})

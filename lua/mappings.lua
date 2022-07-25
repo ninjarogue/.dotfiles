@@ -166,4 +166,6 @@ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ direction =
 vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', 's', "<cmd>HopWord<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'S', "<cmd>HopWord<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 's', "<cmd>HopChar1<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<leader>2', "<cmd>HopChar2<cr>", { noremap = true, silent = true })
